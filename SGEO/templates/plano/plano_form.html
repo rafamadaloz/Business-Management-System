@@ -1,0 +1,651 @@
+<!-- Body-->
+<div class="body">
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<button style="position: absolute; right: 0;" type="button" id="changetabbutton" class="btn btn-primary ">Próximo</button>
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#tab_plano" data-toggle="tab">PLANO</a></li>
+      <li role="presentation" class="tab-adicionais"><a href="#tab_adicionais" data-toggle="tab">ADICIONAIS</a></li>
+      <li role="presentation" class="tab-pagamento"><a href="#tab_resumo" data-toggle="tab">PAGAMENTO</a></li>
+    </ul>
+    <div class="tab-content">
+
+      <!-- Tab grupo -->
+      <div role="tabpanel" class="tab-pane active" id="tab_plano">
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.tipo_plano.label}}</label>{% if form.tipo_plano.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.tipo_plano.errors %}<label class="error">{% for error in form.tipo_plano.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.tipo_plano}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.tipo_pagamento.label}}</label>{% if form.tipo_pagamento.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.tipo_pagamento.errors %}<label class="error">{% for error in form.tipo_pagamento.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.tipo_pagamento}}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-2">
+              <div class="form-group">
+                <div class="form-line">
+                  <label>Valor (R$)</label>
+                  <span class="form-control" id="id_valor_plano"></span>
+                </div>
+              </div>
+         </div>
+
+          <div class="col-sm-3">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.codigo_parceiro.label}}</label>{% if form.codigo_parceiro.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.codigo_parceiro.errors %}<label class="error">{% for error in form.codigo_parceiro.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.codigo_parceiro}}
+            </div>
+          </div>
+        </div>
+
+          <div id="price_page">
+
+                                    <div class="row planos-boxes">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <div class="price-box" style="margin-top: 18px;" tabindex="gratis">
+                                                <div class="price-header">
+
+                                                    <h4 class="upper">Iniciante</h4>
+                                                </div>
+                                                <div class="price-rate">
+                                                    <sup>R&#36;</sup> <span id="preco_basic" class="rate">...</span>
+                                                    <small>/ Mês</small>
+                                                </div>
+                                                <div class="price-body">
+                                                    <ul>
+                                                        <li><strong>1</strong> Usuário</li>
+                                                        <li><strong>50MB</strong> Armazenamento</li>
+                                                        <li><strong>50</strong> Boletos</></li>
+                                                        <li><strong>50</strong> NF-e | NFC-e</li>
+                                                        <li><strike>NFS-e</strike></li>
+                                                        <li>Gestão de Estoque</li>
+                                                        <li>Gestão Financeira</li>
+                                                        <li>Gestão de Compras</li>
+                                                        <li>Gestão de Vendas</li>
+                                                        <li><strike>Serviços</strike></li>
+                                                        <li>Relatórios</li>
+                                                        <li>CRM</li>
+                                                        <li>Contratos</li>
+                                                        <li><strike>PDV</strike> <b class="em-breve">Em breve</b></li>
+                                                        <li><strike>Integração de Pagamento</strike></li>
+                                                        <li>Suporte Online</li>
+                                                        <li>Conexão Segura (SSL)</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="space-30 hidden visible-xs"></div>
+                                        </div>
+                                         <div class="col-xs-12 col-sm-3">
+                                            <div class="price-box" style="margin-top: 18px;" tabindex="gratis">
+                                                <div class="price-header">
+
+                                                    <h4 class="upper">Controle</h4>
+                                                </div>
+                                                <div class="price-rate">
+                                                    <sup>R&#36;</sup> <span id="preco_medium" class="rate">...</span>
+                                                    <small>/ Mês</small>
+                                                </div>
+                                                <div class="price-body">
+                                                    <ul>
+                                                                <li><strong>3</strong> Usuários</li>
+                                                                <li><strong>200MB</strong> Armazenamento</li>
+                                                                <li><strong>100</strong> Boletos</></li>
+                                                                <li><strong>100</strong> NF-e | NFC-e</li>
+                                                                <li><strong>100</strong> NFS-e</li>
+                                                                <li>Gestão de Estoque</li>
+                                                                <li>Gestão Financeira</li>
+                                                                <li>Gestão de Compras</li>
+                                                                <li>Gestão de Vendas</li>
+                                                                <li>Serviços</li>
+                                                                <li>Relatórios</li>
+                                                                <li>CRM</li>
+                                                                <li>Contratos</li>
+                                                                <li>PDV <b class="em-breve">Em breve</b></li>
+                                                                <li><strike>Integração de Pagamento</strike></li>
+                                                                <li>Suporte Online</li>
+                                                                <li>Conexão Segura (SSL)</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="space-30 hidden visible-xs"></div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-3">
+                                            <div class="price-box" tabindex="pro">
+                                                <div class="mais-vendido">
+                                                    <span>mais vendido</span>
+                                                </div>
+                                                <div class="price-header">
+                                                    <h4 class="upper">Profissional</h4>
+                                                </div>
+                                                <div class="price-rate">
+                                                    <sup>R&#36;</sup> <span id="preco_pro" class="rate">...</span>
+                                                    <small>/ Mês</small>
+                                                </div>
+                                                <div class="price-body">
+                                                    <ul>
+                                                                       <li><strong>5</strong> Usuários</li>
+                                                                        <li><strong>1GB</strong> Armazenamento</li>
+                                                                        <li><strong>500</strong> Boletos</></li>
+                                                                        <li><strong>500</strong> NF-e | NFC-e</li>
+                                                                        <li><strong>300</strong> NFS-e</li>
+                                                                        <li>Gestão de Estoque</li>
+                                                                        <li>Gestão Financeira</li>
+                                                                        <li>Gestão de Compras</li>
+                                                                        <li>Gestão de Vendas</li>
+                                                                        <li>Serviços</li>
+                                                                        <li>Relatórios</li>
+                                                                        <li>CRM</li>
+                                                                        <li>Contratos</li>
+                                                                        <li>PDV <b class="em-breve">Em breve</b></li>
+                                                                        <li>Integração de Pagamento</li>
+                                                                        <li>Suporte Online</li>
+                                                                        <li>Conexão Segura (SSL)</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="space-30 hidden visible-xs"></div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-3">
+                                            <div class="price-box" style="margin-top: 18px;" tabindex="premium">
+                                                <div class="price-header">
+
+                                                    <h4 class="upper">Corporativo</h4>
+                                                </div>
+                                                <div class="price-rate">
+                                                    <sup>R&#36;</sup> <span id="preco_premium" class="rate">...</span>
+                                                    <small>/ Mês</small>
+                                                </div>
+                                                <div class="price-body">
+                                                    <ul>
+                                                        <li><strong>10</strong> Usuários</li>
+                                                        <li><strong>2GB</strong> Armazenamento</li>
+                                                        <li><strong>Ilimitado</strong> Boletos</></li>
+                                                        <li><strong>Ilimitado</strong> NF-e | NFC-e</li>
+                                                        <li><strong>500</strong> NFS-e</li>
+                                                        <li>Gestão de Estoque</li>
+                                                        <li>Gestão Financeira</li>
+                                                        <li>Gestão de Compras</li>
+                                                        <li>Gestão de Vendas</li>
+                                                        <li>Serviços</li>
+                                                        <li>Relatórios</li>
+                                                        <li>CRM</li>
+                                                        <li>Contratos</li>
+                                                        <li>PDV <b class="em-breve">Em breve</b></li>
+                                                        <li>Integração de Pagamento</li>
+                                                        <li>Suporte Online</li>
+                                                        <li>Conexão Segura (SSL)</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+      </div>
+
+
+      <div role="tabpanel" class="tab-pane" id="tab_adicionais">
+
+       <div class="col-sm-8">
+       <div class="adicionais" style="width: 100%; height: 40vh">
+
+        <div class="col-sm-8">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.notas_adicionais.label}}</label>{% if form.notas_adicionais.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.notas_adicionais.errors %}<label class="error">{% for error in form.notas_adicionais.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.notas_adicionais}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+              <div class="form-group">
+                <div class="form-line">
+                  <label>Valor (R$)</label>
+                  <span class="form-control" id="id_valor_notas_adicionais">0,00</span>
+                </div>
+              </div>
+         </div>
+
+
+        <div class="col-sm-8">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.boletos_adicionais.label}}</label>{% if form.boletos_adicionais.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.boletos_adicionais.errors %}<label class="error">{% for error in form.boletos_adicionais.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.boletos_adicionais}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+              <div class="form-group">
+                <div class="form-line">
+                  <label>Valor (R$)</label>
+                  <span class="form-control" id="id_valor_boletos_adicionais">0,00</span>
+                </div>
+              </div>
+         </div>
+
+         <div class="col-sm-8">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.usuarios_adicionais.label}}</label>{% if form.usuarios_adicionais.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.usuarios_adicionais.errors %}<label class="error">{% for error in form.usuarios_adicionais.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.usuarios_adicionais}}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-4">
+              <div class="form-group">
+                <div class="form-line">
+                  <label>Valor (R$)</label>
+                  <span class="form-control" id="id_valor_usuarios_adicionais">0,00</span>
+                </div>
+              </div>
+         </div>
+
+      </div>
+
+      </div>
+    </div>
+
+
+        <div role="tabpanel" class="tab-pane" id="tab_resumo">
+
+             <div class="col-md-6 resumo_compra">
+                <div class="tabela-dashboard">
+                    <div class="tab-content">
+                            <div class="container-table100">
+                                <div class="wrap-table100">
+                                    <div class="table100">
+                                        <table>
+                                            <tbody>
+                                            <tr class="">
+                                                <td class="column3">Plano <b id="resumo_plano"></b> <b id="resumo_recorrencia"></b></td>
+                                                <td class="column6">R$ <b id="resumo_valor_plano">0,00</b></td>
+                                            </tr>
+                                             <tr class="">
+                                                <td class="column3"><b id="resumo_notas_adicionais">0</b> notas adicionais</td>
+                                                <td class="column6">R$ <b id="resumo_valor_notas_adicionais">0,00</b></td>
+                                            </tr>
+                                             <tr class="">
+                                                <td class="column3"><b id="resumo_boletos_adicionais">0</b> boletos adicionais</td>
+                                                <td class="column6">R$ <b id="resumo_valor_boletos_adicionais">0,00</b></td>
+                                            </tr>
+                                            <tr class="">
+                                                <td class="column3"><b id="resumo_usuarios_adicionais">0</b> usuários adicionais</td>
+                                                <td class="column6">R$ <b id="resumo_valor_usuarios_adicionais">0,00</b></td>
+                                            </tr>
+                                             <tr class="">
+                                                <td class="column3">Descontos</td>
+                                                <td class="column6">R$ <b>0,00</b></td>
+                                            </tr>
+                                            <tr class="">
+                                                <td class="column3">Total</td>
+                                                <td class="column6"><b>R$</b> <b id="resumo_total">0,00</b></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                    </div>
+
+                    <button class="btn btn-success foot-btn" style="margin-right:0px; width: 100%; padding: 15px 0px 15px 0px !important;" type="submit"><span style="font-size: 16px !important; font-weight: bold"> Finalizar compra</span></button>
+
+                </div>
+
+            </div>
+
+            <div class="col-sm-3">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.cupom_desconto.label}}</label>{% if form.cupom_desconto.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.cupom_desconto.errors %}<label class="error">{% for error in form.cupom_desconto.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.cupom_desconto}}
+            </div>
+          </div>
+
+      </div>
+
+      </div>
+
+  </div>
+
+<!--  <button class="btn btn-success foot-btn" type="submit"><i class="material-icons">&#xE148;</i><span> SALVAR</span></button>-->
+</div>
+<!--#Body-->
+
+{% block js %}
+
+{% if id_pagseguro%}
+
+<script type="text/javascript"
+src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js">
+</script>
+
+<script>
+
+//Insira o código de checkout gerado no Passo 1
+var code = '{{id_pagseguro}}';
+var callback = {
+    success : function(transactionCode) {
+        //Insira os comandos para quando o usuário finalizar o pagamento.
+        //O código da transação estará na variável "transactionCode"
+        console.log("Compra feita com sucesso, código de transação: " + transactionCode);
+    },
+    abort : function() {
+        //Insira os comandos para quando o usuário abandonar a tela de pagamento.
+        console.log("abortado");
+    }
+};
+//Chamada do lightbox passando o código de checkout e os comandos para o callback
+var isOpenLightbox = PagSeguroLightbox(code, callback);
+// Redireciona o comprador, caso o navegador não tenha suporte ao Lightbox
+if (!isOpenLightbox){
+    location.href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
+}
+
+</script>
+
+{% endif %}
+
+  <script>
+
+
+       $(document).ready(function () {
+        console.log("***** Demo template loaded!");
+
+        $(".ratings-axis-input input").rating();
+
+
+        //initialize instance
+        var enjoyhint_instance = new EnjoyHint({});
+
+//simple config.
+//Only one step - highlighting(with description) "New" button
+//hide EnjoyHint after a click on the button.
+        var enjoyhint_script_steps = [
+            {
+                'click #id_plano_form-tipo_plano': 'Selecione o seu plano',
+                'skipButton': {text: "Fechar"},
+            },
+            {
+                'click #id_plano_form-tipo_pagamento': 'Selecione a recorrência do seu plano',
+                'skipButton': {text: "Fechar"},
+            },
+            {
+                'next #id_plano_form-codigo_parceiro': 'Se algum de nossos parceiros ofereceu o sistema para você, insira o código informado aqui, caso contrário, clique em continuar',
+                'nextButton': {text: "Continuar"},
+                'skipButton': {text: "Fechar"},
+            },
+            {
+                'click #changetabbutton': 'Clique em "Próximo"',
+                'skipButton': {text: "Fechar"},
+            },
+             {
+                'next .adicionais ': 'Selecione os adicionais que desejar',
+                'skipButton': {text: "Fechar"},
+                'nextButton': {text: "Continuar"}
+            },
+            {
+                'click #changetabbutton': 'Clique em "Próximo"',
+                'skipButton': {text: "Fechar"}
+            },
+            {
+                'click .resumo_compra': 'Verifique as informações da compra, clique em "Finalizar Compra" e aguarde a tela de pagamento',
+                'skipButton': {text: "Fechar"},
+            },
+            {
+                'click #JgIlzoz-1564949533764': 'Caso tenha alguma dúvida, clique aqui.',
+                'skipButton': {text: "Fechar"},
+            },
+
+        ];
+
+//set script config
+        enjoyhint_instance.set(enjoyhint_script_steps);
+
+//run Enjoyhint script
+        enjoyhint_instance.run();
+
+    });
+
+
+
+      $(function () {
+
+          $('#changetabbutton').click(function (e) {
+              e.preventDefault();
+              var next_tab = $('.nav-tabs > .active').next('li').find('a');
+              if (next_tab.length > 0) {
+                  next_tab.trigger('click');
+              } else {
+                  $('.nav-tabs li:eq(0) a').trigger('click');
+              }
+          });
+      });
+
+      function calcula_total_recorrencia() {
+          var tipo_recorrencia = $('#id_plano_form-tipo_pagamento option:selected').text();
+
+          if (tipo_recorrencia == 'Mensal') {
+
+              {% for plano in all_tipos_plano %}
+
+              {% if plano.nome == 'Iniciante'%}
+
+              $('#preco_basic').text('{{plano.valor_mensal}}');
+
+              {% elif plano.nome == 'Controle'%}
+
+              $('#preco_medium').text('{{plano.valor_mensal}}');
+
+              {% elif plano.nome == 'Profissional'%}
+
+              $('#preco_pro').text('{{plano.valor_mensal}}');
+
+              {% elif plano.nome == 'Corporativo'%}
+
+              $('#preco_premium').text('{{plano.valor_mensal}}');
+
+              {% endif %}
+
+              {% endfor %}
+
+          } else if (tipo_recorrencia == 'Anual') {
+              {% for plano in all_tipos_plano %}
+
+              {% if plano.nome == 'Iniciante'%}
+
+              $('#preco_basic').text('79,00');
+
+              {% elif plano.nome == 'Controle'%}
+
+              $('#preco_medium').text('129,00');
+
+              {% elif plano.nome == 'Profissional'%}
+
+              $('#preco_pro').text('179,00');
+
+              {% elif plano.nome == 'Corporativo'%}
+
+              $('#preco_premium').text('279,00');
+
+              {% endif %}
+
+              {% endfor %}
+          }
+      }
+
+      $('#id_plano_form-tipo_pagamento').click(function () {
+          calcula_total_recorrencia()
+      });
+
+      $('#id_plano_form-cupom_desconto').keyup(function () {
+          this.value = this.value.toUpperCase();
+      });
+
+      $('#id_plano_form-codigo_parceiro').keyup(function () {
+          this.value = this.value.toUpperCase();
+      });
+
+       $(function(){
+
+           calculaBoletosAdicionais();
+           calculaNotasAdicionais();
+           calculaValoresDoPlano();
+           calculaUsuariosAdicionais();
+           calculaTotal();
+
+           function calculaTotal() {
+               var totalNotas = $("#id_valor_notas_adicionais").text().replace(',', '.');
+               var totalBoletos = $("#id_valor_boletos_adicionais").text().replace(',', '.');
+               var totalUsuarios = $("#id_valor_usuarios_adicionais").text().replace(',', '.');
+               var totalPlano = $("#id_valor_plano").text().replace(',', '.');
+               totalNotas = parseFloat(totalNotas);
+               totalBoletos = parseFloat(totalBoletos);
+               totalUsuarios = parseFloat(totalUsuarios);
+               totalPlano = parseFloat(totalPlano);
+
+               var total = (totalNotas + totalBoletos + totalUsuarios + totalPlano).toFixed(2).replace('.', ',');
+               $("#resumo_total").text(total);
+           }
+
+           function calculaValoresDoPlano() {
+                var nome = $('#id_plano_form-tipo_plano option:selected').text();
+                var recorrencia = $('#id_plano_form-tipo_pagamento option:selected').text();
+
+                {% for n in all_tipos_plano %}
+
+                if (nome == '{{n.nome}}' && recorrencia == 'Mensal') {
+                        $("#id_valor_plano").text('{{n.valor_mensal}}');
+                }
+                if (nome == '{{n.nome}}' && recorrencia == 'Anual') {
+                        $("#id_valor_plano").text('{{n.valor_anual}}');
+                }
+
+                {% endfor %}
+
+                if ($('#id_plano_form-tipo_plano').val() == 0) {
+                    $("#id_valor_plano").text('0,00');
+                }
+
+                $("#resumo_plano").text(nome);
+                $("#resumo_recorrencia").text(recorrencia);
+                var valor_calculado = $("#id_valor_plano").text();
+                $("#resumo_valor_plano").text(valor_calculado);
+                calculaTotal()
+           }
+
+           function calculaNotasAdicionais() {
+                var quantidade = $('#id_plano_form-notas_adicionais option:selected').text();
+
+                {% for n in all_notas_adicionais %}
+
+                if (quantidade == '{{n.quantidade}}') {
+                        $("#id_valor_notas_adicionais").text('{{n.valor}}');
+                }
+
+                {% endfor %}
+
+                if ($('#id_plano_form-notas_adicionais').val() == 0) {
+                    $("#id_valor_notas_adicionais").text('0,00');
+                }
+
+                $("#resumo_notas_adicionais").text(quantidade);
+                var valor_calculado = $("#id_valor_notas_adicionais").text();
+                $("#resumo_valor_notas_adicionais").text(valor_calculado);
+                calculaTotal()
+           }
+
+           function calculaBoletosAdicionais() {
+               var quantidade = $('#id_plano_form-boletos_adicionais option:selected').text();
+
+
+                {% for b in all_boletos_adicionais %}
+
+                if (quantidade == '{{b.quantidade}}') {
+                        $("#id_valor_boletos_adicionais").text('{{b.valor}}');
+                }
+
+                {% endfor %}
+
+                if ($('#id_plano_form-boletos_adicionais').val() == 0) {
+                    $("#id_valor_boletos_adicionais").text('0,00');
+                }
+
+                $("#resumo_boletos_adicionais").text(quantidade);
+                var valor_calculado = $("#id_valor_boletos_adicionais").text();
+                $("#resumo_valor_boletos_adicionais").text(valor_calculado);
+                calculaTotal()
+
+           }
+
+           function calculaUsuariosAdicionais() {
+               var quantidade = $('#id_plano_form-usuarios_adicionais option:selected').text();
+
+                {% for u in all_usuarios_adicionais %}
+
+                if (quantidade == '{{u.quantidade}}') {
+                        $("#id_valor_usuarios_adicionais").text('{{u.valor}}');
+                }
+
+                {% endfor %}
+
+                if ($('#id_plano_form-usuarios_adicionais').val() == 0) {
+                    $("#id_valor_usuarios_adicionais").text('0,00');
+                }
+
+                $("#resumo_usuarios_adicionais").text(quantidade);
+                var valor_calculado = $("#id_valor_usuarios_adicionais").text();
+                $("#resumo_valor_usuarios_adicionais").text(valor_calculado);
+                calculaTotal()
+
+           }
+
+           // $(document).ready(function () {
+           //     calculaTotal();
+           // });
+
+           $('#id_plano_form-tipo_plano, #id_plano_form-tipo_pagamento').click(function(){
+                calculaValoresDoPlano();
+            });
+
+           $('#id_plano_form-notas_adicionais').click(function(){
+                calculaNotasAdicionais();
+            });
+
+           $('#id_plano_form-boletos_adicionais').click(function(){
+                calculaBoletosAdicionais();
+            });
+
+            $('#id_plano_form-usuarios_adicionais').click(function(){
+                calculaUsuariosAdicionais();
+            });
+        });
+
+  </script>
+
+{% endblock %}

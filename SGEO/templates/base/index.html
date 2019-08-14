@@ -1,0 +1,1147 @@
+{%extends 'base/base.html'%}
+
+{%block title%}Página Inicial{%endblock%}
+{%block content%}
+
+<section id="dashboard" class="content">
+
+    <div class="container-fluid">
+
+        <!--
+
+        <div class="alert alert-warning fade in alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Atenção!</strong> Já foram utilizados 80% do armazenamento disponível em seu plano. Para poder continuar usando todos os recursos do sistema
+            apague seu arquivos mais antigos ou adicione mais armazenamento <a href="{% url 'plano:adicionarplanoview' %}" class="alert-link">aqui</a>.
+        </div>
+
+
+        <div class="alert alert-danger fade in alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Atenção!</strong> Já foram utilizados 100% do armazenamento disponível em seu plano. Para poder continuar usando todos os recursos do sistema
+            apague seu arquivos mais antigos ou adicione mais armazenamento <a href="{% url 'plano:adicionarplanoview' %}" class="alert-link">aqui</a>.
+        </div>
+
+        -->
+
+
+        <div id="atalhos" class="centered">
+
+            <div class="button-group row">
+                <div class="col-md-2 col-sm-4">
+                    <button onclick="window.location.href='{% url 'cadastro:addclienteview' %}'"
+                            class="large red button"><a></a>novo cliente
+                    </button>
+                </div>
+                <div class="col-md-2 col-sm-4">
+                    <button onclick="window.location.href='{% url 'cadastro:addprodutoview' %}'"
+                            class="large red button">novo produto
+                    </button>
+                </div>
+                <div class="col-md-2 col-sm-4">
+                    <button onclick="window.location.href='{% url 'vendas:addpedidovendaview' %}'"
+                            class="large red button">nova venda
+                    </button>
+                </div>
+                <div class="col-md-2 col-sm-4">
+                    <button onclick="window.location.href='{% url 'fiscal:listanotafiscalsaidaview' %}'"
+                            class="large red button">nova NF-e
+                    </button>
+                </div>
+                {% if not certificado_a1 %}
+                <div class="col-md-4 col-sm-8">
+                    <button onclick="window.location.href='{% url 'compra_certificado:viewformulario' %}'"
+                            class="large blue button"><a></a>Comprar certificado digital A1
+                    </button>
+                </div>
+                {% else %}
+                <div class="col-md-2 col-sm-4">
+                    <button onclick="window.location.href='{% url 'financeiro:listalancamentoview' %}'"
+                            class="large red button">novo Lançamento
+                    </button>
+                </div>
+                <div class="col-md-2 col-sm-4">
+                    <button onclick="window.location.href='{% url 'fiscal:listanotafiscalsaidaview' %}'"
+                            class="large red button">novo boleto
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <br>
+
+
+        <div class="row widgets-valores">
+            <!-- task, page, download counter  start -->
+
+            <div class="col-xl-3 col-md-3 col-sm-6">
+                <a href="{% url 'financeiro:listarecebimentosview' %}">
+                    <div class="card bg-c-green update-card">
+                        <div class="card-block">
+                            <div class="row align-items-end">
+                                <div class="col-md-8 col-sm-8 col-xl-8 col-lg-8">
+                                    <h4 class="text-white">R$ {{valor_recebidos_dia|default_if_none:"0,00"}}</h4>
+                                    <h6 class="text-white m-b-0">Recebimentos do dia</h6>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xl-4 col-lg-4 text-right">
+                                    <canvas id="update-chart-2" height="50"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>No mês:
+                                R$ {{valor_recebidos_mes|default_if_none:"0,00"}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-3 col-md-3 col-sm-6">
+                <a href="{% url 'financeiro:listapagamentosview' %}">
+                    <div class="card bg-c-yellow update-card">
+                        <div class="card-block">
+                            <div class="row align-items-end">
+                                <div class="col-md-8 col-sm-8 col-xl-8 col-lg-8">
+                                    <h4 class="text-white">R$ {{valor_pago_dia|default_if_none:"0,00"}}</h4>
+                                    <h6 class="text-white m-b-0">Pagamentos do dia</h6>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xl-4 col-lg-4 text-right">
+                                    <canvas id="update-chart-1" height="50"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>No mês:
+                                R$ {{valor_pago_mes|default_if_none:"0,00"}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-3 col-md-3 col-sm-6">
+                <a href="{% url 'financeiro:listacontareceberview' %}">
+                    <div class="card bg-c-lite-green update-card">
+                        <div class="card-block">
+                            <div class="row align-items-end">
+                                <div class="col-md-8 col-sm-8 col-xl-8 col-lg-8">
+                                    <h4 class="text-white">R$ {{valor_a_receber_dia|default_if_none:"0,00"}}</h4>
+                                    <h6 class="text-white m-b-0">À receber do dia</h6>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xl-4 col-lg-4 text-right">
+                                    <canvas id="update-chart-4" height="50"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>No mês:
+                                R$ {{valor_a_receber_mes|default_if_none:"0,00"}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-3 col-md-3 col-sm-6">
+                <a href="{% url 'financeiro:listacontapagarview' %}">
+                    <div class="card bg-c-pink update-card">
+                        <div class="card-block">
+                            <div class="row align-items-end">
+                                <div class="col-md-8 col-sm-8 col-xl-8 col-lg-8">
+                                    <h4 class="text-white">R$ {{valor_a_pagar_dia|default_if_none:"0,00"}}</h4>
+                                    <h6 class="text-white m-b-0">À pagar do dia</h6>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xl-4 col-lg-4 text-right">
+                                    <canvas id="update-chart-3" height="50"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>No mês:
+                                R$ {{valor_a_pagar_mes|default_if_none:"0,00"}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- task, page, download counter  end -->
+
+        </div>
+
+        <div class="grafico-fluxo-caixa">
+            <h2><i class="material-icons">&#xE227;</i>Faturamento Total</h2>
+            <div id="chartdiv"></div>
+        </div>
+
+
+        <!-- WIDGET -->
+        <div id="widgets" class="row">
+
+            <!--<div class="col-lg-2 col-md-3 col-sm-5 col-xs-12">-->
+            <!--&lt;!&ndash; START WIDGET SLIDER &ndash;&gt;-->
+            <!--<div class="widget widget-default widget-carousel widget1">-->
+            <!--<a href="{% url 'fiscal:listanotafiscalsaidaview' %}">-->
+            <!--<div>-->
+            <!--<div class="widget-title">nf-e autorizadas</div>-->
+            <!--<div class="widget-subtitle"></div>-->
+            <!--<div class="widget-int">{{contador_nfe_autorizada}}</div>-->
+            <!--</div>-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; END WIDGET SLIDER &ndash;&gt;-->
+            <!--</div>-->
+
+            <!--<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">-->
+            <!--&lt;!&ndash; START WIDGET SLIDER &ndash;&gt;-->
+            <!--<div class="widget widget-default widget-carousel widget2">-->
+            <!--<a href="{% url 'fiscal:listanotafiscalsaidaview' %}">-->
+            <!--<div>-->
+            <!--<div class="widget-title">nf-e em digitação</div>-->
+            <!--<div class="widget-subtitle"></div>-->
+            <!--<div class="widget-int">{{contador_nfe_em_digitacao}}</div>-->
+            <!--</div>-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; END WIDGET SLIDER &ndash;&gt;-->
+            <!--</div>-->
+
+            <!--<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">-->
+            <!--&lt;!&ndash; START WIDGET SLIDER &ndash;&gt;-->
+            <!--<div class="widget widget-default widget-carousel widget3">-->
+            <!--<a href="{% url 'fiscal:listanotafiscalsaidaview' %}">-->
+            <!--<div>-->
+            <!--<div class="widget-title">nf-e canceladas</div>-->
+            <!--<div class="widget-subtitle"></div>-->
+            <!--<div class="widget-int">{{contador_nfe_cancelada}}</div>-->
+            <!--</div>-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; END WIDGET SLIDER &ndash;&gt;-->
+            <!--</div>-->
+
+            <!--<div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">-->
+            <!--&lt;!&ndash; START WIDGET SLIDER &ndash;&gt;-->
+            <!--<div class="widget widget-default widget-carousel widget4">-->
+            <!--<div>-->
+            <!--<div class="widget-title">nf-e restantes: {{contador_nfe_restantes}} </div>-->
+            <!--<div class="widget-subtitle widget-buttons"></div>-->
+            <!--<div class="widget-title">total de nf-e digitadas: {{contador_nfe_total}} </div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; END WIDGET SLIDER &ndash;&gt;-->
+            <!--</div>-->
+
+            <!--<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">-->
+
+            <!--<div class="widget widget-info widget-padding-sm">-->
+            <!--<div class="widget-big-int plugin-clock">00:00</div>-->
+            <!--<div class="widget-buttons-clock widget-c3">-->
+            <!--<div class="widget-subtitle plugin-date">Loading...</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--</div>-->
+
+
+            <!-- widget clientes registrados na empresa
+                                    <div class="col-md-4">
+
+                                          <!-- START WIDGET REGISTRED
+                                          <div class="widget widget-default widget-item-icon" onclick="location.href='pages-address-book.html';">
+                                              <div class="widget-item-left">
+                                                  <span class="fa fa-user"></span>
+                                              </div>
+                                              <div class="widget-data">
+                                                  <div class="widget-int num-count">375</div>
+                                                  <div class="widget-title">Clientes Registrados</div>
+                                                  <div class="widget-subtitle">Na sua empresa</div>
+                                              </div>
+                                          </div>
+                                          <!-- END WIDGET REGISTRED
+
+                                    </div>
+                  -->
+
+
+            <!--
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+
+                <div class="widget widget-meta widget-padding-sm">
+                    <div class="widget-title">Meta anual</div>
+                    <div class="canvas-wrap">
+                        <canvas id="canvas" width="100" height="70"></canvas>
+                        <span id="procent"></span>
+                    </div>
+                </div>
+
+            </div> -->
+
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="tabela-dashboard" id="recebimentos">
+                    <h2><i class="material-icons">arrow_upward</i> Recebimentos</h2>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home_receber">Próximos a receber</a></li>
+                        <li><a data-toggle="tab" href="#atrasados_receber">Atrasados </a></li>
+                    </ul>
+
+                    <div class="tab-content ">
+                        <div id="home_receber" class="tab-pane fade in active">
+                            <div class="container-table100">
+                                <div class="wrap-table100">
+                                    <div class="table100">
+                                        <table>
+                                            <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Data</th>
+                                                <th class="column3">Descrição</th>
+                                                <th class="column6">Valor</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for conta in all_a_receber %}
+                                            <tr class="clickable-row"
+                                                data-href="{% url 'financeiro:editarcontareceberview' conta.id %}">
+                                                <td class="column1">
+                                                    {{conta.format_data_vencimento|default_if_none:""}}
+                                                </td>
+                                                <td class="column3">{{conta.descricao}}</td>
+                                                <td class="column6">R$ {{conta.format_valor_liquido}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        {% if qtd_a_receber > 7 %}
+                                        <div class="text-center">
+                                            <a href="{% url 'financeiro:listacontareceberview' %}"
+                                               class="btn-ver-todos">Ver mais</a>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div id="atrasados_receber" class="tab-pane fade">
+                            <div class="container-table100">
+                                <div class="wrap-table100">
+                                    <div class="table100">
+                                        <table>
+                                            <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Data</th>
+                                                <th class="column3">Descrição</th>
+                                                <th class="column6">Valor</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for conta in entradas_atrasadas %}
+                                            <tr class="clickable-row"
+                                                data-href="{% url 'financeiro:editarcontareceberview' conta.id %}">
+                                                <td class="column1">
+                                                    {{conta.format_data_vencimento|default_if_none:""}}
+                                                </td>
+                                                <td class="column3">{{conta.descricao}}</td>
+                                                <td class="column6">R$ {{conta.format_valor_liquido}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        {% if contas_receber_atrasadas > 7 %}
+                                        <div class="text-center">
+                                            <a href="{% url 'financeiro:listacontareceberatrasadasview' %}"
+                                               class="btn-ver-todos">Ver mais</a>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="tabela-dashboard pagamentos">
+                    <h2><i class="material-icons down">arrow_downward</i> Pagamentos</h2>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home_pagamentos">Próximos a pagar</a></li>
+                        <li><a data-toggle="tab" href="#atrasados_pagamentos">Atrasados</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="home_pagamentos" class="tab-pane fade in active">
+                            <div class="container-table100">
+                                <div class="wrap-table100">
+                                    <div class="table100">
+                                        <table>
+                                            <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Data</th>
+                                                <th class="column3">Descrição</th>
+                                                <th class="column6">Valor</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for conta in all_a_pagar %}
+                                            <tr class="clickable-row"
+                                                data-href="{% url 'financeiro:editarcontapagarview' conta.id %}">
+                                                <td class="column1">
+                                                    {{conta.format_data_vencimento|default_if_none:""}}
+                                                </td>
+                                                <td class="column3">{{conta.descricao}}</td>
+                                                <td class="column6">R$ {{conta.format_valor_liquido}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        {% if qtd_a_pagar > 7 %}
+                                        <div class="text-center">
+                                            <a href="{% url 'financeiro:listacontapagarview' %}" class="btn-ver-todos">Ver
+                                                mais</a>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="atrasados_pagamentos" class="tab-pane fade">
+                            <div class="container-table100">
+                                <div class="wrap-table100">
+                                    <div class="table100">
+                                        <table>
+                                            <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Data</th>
+                                                <th class="column3">Descrição</th>
+                                                <th class="column6">Valor</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for conta in pagamentos_atrasados %}
+                                            <tr class="clickable-row"
+                                                data-href="{% url 'financeiro:editarcontapagarview' conta.id %}">
+                                                <td class="column1">
+                                                    {{conta.format_data_vencimento|default_if_none:""}}
+                                                </td>
+                                                <td class="column3">{{conta.descricao}}</td>
+                                                <td class="column6">R$ {{conta.format_valor_liquido}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        {% if contas_pagar_atrasadas > 7 %}
+                                        <div class="text-center">
+                                            <a href="{% url 'financeiro:listacontapagaratrasadasview' %}"
+                                               class="btn-ver-todos">Ver mais</a>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                <div class="card inicial-card alertas ">
+                    <div class="header">
+                        <h2><i class="material-icons" style="color:#cb5e5a;">&#xE85A;</i>ALERTAS</h2>
+                    </div>
+                    <div class="body ">
+                        <table class="table table-hover">
+                            <tbody>
+                            {% if perms.cadastro.view_transportadora %}
+                            <tr {% if alertas.produtos_baixo_estoque %}class="alerta" {% endif %}>
+                                <td>
+                                    <a href="{% url 'cadastro:listaprodutosbaixoestoqueview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{alertas.produtos_baixo_estoque}}</b> Produtos com baixo estoque
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.vendas.view_orcamentovenda %}
+                            <tr {% if alertas.orcamentos_venda_vencidos %}class="alerta" {% endif %}>
+                                <td>
+                                    <a href="{% url 'vendas:listaorcamentovendavencidoview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{alertas.orcamentos_venda_vencidos}}</b> Orçamentos de venda vencidos
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.compras.view_orcamentocompra %}
+                            <tr {% if alertas.orcamentos_compra_vencidos %}class="alerta" {% endif %}>
+                                <td>
+                                    <a href="{% url 'compras:listaorcamentocompravencidosview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{alertas.orcamentos_compra_vencidos}}</b> Orçamentos de compra vencidos
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.vendas.view_pedidovenda %}
+                            <tr {% if alertas.pedidos_venda_atrasados %}class="alerta" {% endif %}>
+                                <td>
+                                    <a href="{% url 'vendas:listapedidovendaatrasadosview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{alertas.pedidos_venda_atrasados}}</b> Pedidos de venda atrasados
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.compras.view_pedidocompra %}
+                            <tr {% if alertas.pedidos_compra_atrasados %}class="alerta" {% endif %}>
+                                <td>
+                                    <a href="{% url 'compras:listapedidocompraatrasadosview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{alertas.pedidos_compra_atrasados}}</b> Pedidos de compra atrasados
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.financeiro.view_lancamento %}
+                            <tr {% if alertas.contas_receber_atrasadas %}class="alerta" {% endif %}>
+                                <td>
+                                    <a href="{% url 'financeiro:listacontareceberatrasadasview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{alertas.contas_receber_atrasadas}}</b> Contas a receber atrasadas
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr {% if alertas.contas_pagar_atrasadas %}class="alerta" {% endif %}>
+                                <td>
+                                    <a href="{% url 'financeiro:listacontapagaratrasadasview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{alertas.contas_pagar_atrasadas}}</b> Contas a pagar atrasadas
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="card inicial-card agendamentos">
+                    <div class="header">
+                        <h2><i class="material-icons">&#xE8DF;</i>AGENDAMENTOS</h2>
+                    </div>
+                    <div class="body">
+                        <table class="table table-hover">
+                            <tbody>
+                            {% if perms.cadastro.view_transportadora %}
+                            <tr {% if agenda_hoje.orcamento_venda_hoje %}class="hoje" {% endif %}>
+                                <td>
+                                    <a href="{% url 'vendas:listaorcamentovendahojeview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{agenda_hoje.orcamento_venda_hoje}}</b> Orçamentos de venda a vencer
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.compras.view_orcamentocompra %}
+                            <tr {% if agenda_hoje.orcamento_compra_hoje %}class="hoje" {% endif %}>
+                                <td>
+                                    <a href="{% url 'compras:listaorcamentocomprahojeview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{agenda_hoje.orcamento_compra_hoje}}</b> Orçamentos de compra a vencer
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.vendas.view_pedidovenda %}
+                            <tr {% if agenda_hoje.pedido_venda_hoje %}class="hoje" {% endif %}>
+                                <td>
+                                    <a href="{% url 'vendas:listapedidovendahojeview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{agenda_hoje.pedido_venda_hoje}}</b> Pedidos de venda com entrega
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.compras.view_pedidocompra %}
+                            <tr {% if agenda_hoje.pedido_compra_hoje %}class="hoje" {% endif %}>
+                                <td>
+                                    <a href="{% url 'compras:listapedidocomprahojeview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{agenda_hoje.pedido_compra_hoje}}</b> Pedidos de compra com entrega
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.financeiro.view_lancamento %}
+                            <tr {% if agenda_hoje.contas_receber_hoje %}class="hoje" {% endif %}>
+                                <td>
+                                    <a href="{% url 'financeiro:listacontareceberhojeview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{agenda_hoje.contas_receber_hoje}}</b> Contas a receber
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr {% if agenda_hoje.contas_pagar_hoje %}class="hoje" {% endif %}>
+                                <td>
+                                    <a href="{% url 'financeiro:listacontapagarhojeview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{agenda_hoje.contas_pagar_hoje}}</b> Contas a pagar
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="card inicial-card cadastros">
+                    <div class="header">
+                        <h2><i class="material-icons">&#xE85D;</i>CADASTRO</h2>
+                    </div>
+                    <div class="body">
+                        <table class="table table-hover">
+                            <tbody>
+                            {% if perms.cadastro.view_cliente %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'cadastro:listaclientesview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{quantidade_cadastro.clientes}}</b> Clientes cadastrados
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.cadastro.view_fornecedor %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'cadastro:listafornecedoresview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{quantidade_cadastro.fornecedores}}</b> Fornecedores cadastrados
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.cadastro.view_produto %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'cadastro:listaprodutosview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{quantidade_cadastro.produtos}}</b> Produtos cadastrados
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.cadastro.view_empresa %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'cadastro:listaempresasview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{quantidade_cadastro.empresas}}</b> Empresas cadastradas
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if perms.cadastro.view_transportadora %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'cadastro:listatransportadorasview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            <b>{{quantidade_cadastro.transportadoras}}</b> Transportadoras cadastradas
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="card inicial-card">
+                    <div class="header">
+                        <h2><i class="material-icons">info</i>INFORMAÇÕES</h2>
+                    </div>
+                    <div class="body">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="{% url 'fiscal:listanotafiscalsaidaview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            NF-e <b>...</b> restantes | <b>0</b> emitidas
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{% url 'fiscal:listanotafiscalsaidaview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            NFC-e <b>...</b> restantes | <b>0</b> emitidas
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{% url 'fiscal:listanotafiscalsaidaview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            NFS-e <b>...</b> restantes | <b>0</b> emitidas
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{% url 'fiscal:listanotafiscalsaidaview' %}">
+                                        <div style="height:100%;width:100%;">
+                                            Boletos <b>...</b> restantes | <b>0</b> emitidas
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+<!--                                <td>-->
+<!--                                    <a href="{% url 'fiscal:listanotafiscalsaidaview' %}">-->
+<!--                                        <div style="height:100%;width:100%;">-->
+<!--                                            Armazenamento <b>{{armazenamento}} Mb</b> / <b>50 Mb</b>-->
+<!--                                        </div>-->
+<!--                                    </a>-->
+<!--                                </td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            -->
+
+
+
+
+        </div>
+
+
+        <!--<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">-->
+        <!--<div class='widget-graph widget&#45;&#45;3x1'>-->
+        <!--&lt;!&ndash;<header class='widget-header'>-->
+        <!--<div class='widget-header-indicator'></div>-->
+        <!--</header> &ndash;&gt;-->
+        <!--<div class='widget-content'>-->
+        <!--<canvas id="line-chart"></canvas>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<footer class='widget-footer'>-->
+        <!--<a class='fa fa-trash-o'></a>-->
+        <!--<a class='fa fa-cog'></a>-->
+        <!--</footer>&ndash;&gt;-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">-->
+        <!--<div class="widget-graph widget&#45;&#45;2x1">-->
+        <!--<canvas id="pie-chart" width="800" height="406"></canvas>-->
+        <!--</div>-->
+        <!--</div>-->
+
+
+    </div>
+
+    <div class="modal fade" data-backdrop="static" id="modal_bemvindo" tabindex="-1" role="dialog"
+         aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3>Seja bem-vindo(a) ao SGEO ERP!</h3>
+                    <p>
+                        Antes de começar, responda o questionário abaixo.
+                    </p>
+
+                    <form id="informacoes-empresa">
+
+                    <label>Onde nos conheceu?</label><br>
+                    <select id="ondeconheceu" required>
+                        <option value="hide">Selecione uma opção</option>
+                        <option value="google" rel="icon-temperature">Google</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="blog">Blog</option>
+                        <option value="evento">Evento</option>
+                        <option value="indicacao">Indicação</option>
+                        <option value="outro">Outro</option>
+
+                    </select>
+
+                    <br>
+                    <br>
+
+                    <label>Qual o segmento de sua empresa?</label><br>
+                    <select id="ramoempresa" required>
+                        <option value="hide">Selecione uma opção</option>
+                        <option value="1" rel="icon-temperature">Moda e calçados</option>
+                        <option value="2">Perfumaria e beleza</option>
+                        <option value="3">Distribuição</option>
+                        <option value="4">Alimentos e bebidas</option>
+                        <option value="5">Eletrônicos e informática</option>
+                        <option value="6">Móveis e decoração</option>
+                        <option value="7">Livrarias e papelarias</option>
+                        <option value="8">Tecnologia</option>
+                        <option value="9">Petshop</option>
+                        <option value="10">Serviços</option>
+                        <option value="11">Outros</option>
+                    </select>
+
+                    <br>
+                    <br>
+
+                    <label>Qual o seu negócio? </label><br>
+                    <select id="tiposervico" required>
+                        <option value="hide">Selecione uma opção</option>
+                        <option value="1" rel="icon-temperature">Vendo produtos</option>
+                        <option value="2">Vendo serviços</option>
+                        <option value="3">Vendo produtos e serviços</option>
+                        <option value="4">Não vendo nada</option>
+                    </select>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button id="btn_enviar_form_modal" type="submit" class="btn btn-primary">Continuar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+{%endblock%}
+
+{%block js%}
+
+{% if not user_empresa %}
+<!--
+<script>
+
+     $(document).ready(function () {
+        console.log("***** Demo template loaded!");
+
+        $(".ratings-axis-input input").rating();
+
+
+        //initialize instance
+        var enjoyhint_instance = new EnjoyHint({});
+
+//simple config.
+//Only one step - highlighting(with description) "New" button
+//hide EnjoyHint after a click on the button.
+        var enjoyhint_script_steps = [
+            {
+                'click .btn_cadastro': 'Bem-vindo ao SGEO ERP. Vamos começar fazendo o cadastro da sua empresa, ' +
+                    'clique em "Cadastro"'
+            },
+            {
+                'click .btn_cadastro_empresas': 'Agora vá em "Empresas"'
+            }
+        ];
+
+//set script config
+        enjoyhint_instance.set(enjoyhint_script_steps);
+
+//run Enjoyhint script
+        enjoyhint_instance.run();
+
+    });
+
+</script>
+-->
+{% endif %}
+
+<script>
+
+    $('#btn_enviar_form_modal').on('click', function () {
+
+        var ramoempresa = $('#ramoempresa').val();
+        var ondeconheceu = $('#ondeconheceu').val();
+        var tiposervico = $('#tiposervico').val();
+
+        if (ramoempresa != 'hide' && ondeconheceu != 'hide' && tiposervico != 'hide') {
+            $('#modal_bemvindo').modal('hide');
+            $(".ratings-axis-input input").rating();
+
+
+            //initialize instance
+            var enjoyhint_instance = new EnjoyHint({});
+
+//simple config.
+//Only one step - highlighting(with description) "New" button
+//hide EnjoyHint after a click on the button.
+            var enjoyhint_script_steps = [
+
+                {
+                    'next .btn_configuracoes': 'Para assinar um plano, clique em "Configurações" e depois "Meu Plano"',
+                    'showSkip': false,
+                    'nextButton': {text: "Próximo"}
+                },
+                {
+                    'click .user-helper-dropdown': 'Clique na seta para ver mais opções.',
+                    'shape': 'circle',
+                    'radius': 20,
+                    'showSkip': false,
+                },
+                {
+                    'next .botao_editar_perfil': 'Aqui você pode editar as informações do seu perfil, <br>cadastrar os dados ' +
+                        'da sua empresa e adicionar novos usuários.',
+                    'showSkip': false,
+                    'nextButton': {text: "Próximo"}
+                },
+                {
+                    'next .menu': 'Aqui é o menu onde você irá cadastrar seus<br> clientes, produtos, serviços, empresas, ' +
+                        'lançamentos,<br> notas fiscais e todos os recursos do sistema.',
+                    'showSkip': false,
+                    'nextButton': {text: "Próximo"},
+                },
+                {
+                    'next #atalhos': 'Esses são os botões de atalho para as principais funções do sistema.',
+                    'showSkip': false,
+                    'nextButton': {text: "Próximo"}
+                },
+                {
+                    'next .widgets-valores': 'Aqui você pode consultar as receitas e despesas do dia e do mês.',
+                    'showSkip': false,
+                    'nextButton': {text: "Próximo"}
+                },
+                {
+                    'next #chartdiv': 'Esse gráfico mostra tudo o que você já recebeu e irá receber.',
+                    'showSkip': false,
+                    'nextButton': {text: "Próximo"}
+                },
+                {
+                    'next .pagamentos': 'Aqui você consulta os próximos<br> pagamentos e quais estão atrasados.',
+                    'showSkip': false,
+                    'nextButton': {text: "Próximo"}
+                },
+                {
+                    'next #recebimentos': 'Aqui você consultar os próximos <br>recebimentos e quais estão atrasados.',
+                    'showSkip': false,
+                    'nextButton': {text: "Próximo"}
+                },
+                {
+                    'next .alertas': 'Aqui serão exibidos<br> os alertas do dia.',
+                    'showSkip': false,
+                    'nextButton': {text: "Próximo"}
+                },
+                {
+                    'next .agendamentos': 'Aqui serão exibidos<br> os agendamentos do dia.',
+                    'showSkip': false,
+                    'nextButton': {text: "Próximo"}
+                },
+                {
+                    'next .cadastros': 'Aqui você confere a quantidade<br> de cadastros no sistema.',
+                    'showSkip': false,
+                    'nextButton': {text: "Próximo"}
+                },
+
+            ];
+
+//set script config
+            enjoyhint_instance.set(enjoyhint_script_steps);
+
+//run Enjoyhint script
+            enjoyhint_instance.run();
+
+        }
+        event.preventDefault();
+    });
+
+
+    $(document).ready(function () {
+        var ls = localStorage.getItem("modal");
+        if (!ls) {
+            $('#modal_bemvindo').modal('show');
+        }
+    });
+
+
+    $('#modal_bemvindo').on('shown.bs.modal', function () {
+        localStorage.setItem("modal", false);
+    });
+
+
+
+</script>
+
+<!-- SCRIPT MODAL BEM VINDOS SELECT -->
+<script>
+    $('select').each(function(){
+    var $this = $(this), numberOfOptions = $(this).children('option').length;
+
+    $this.addClass('select-hidden');
+    $this.wrap('<div class="select"></div>');
+    $this.after('<div class="select-styled"></div>');
+
+    var $styledSelect = $this.next('div.select-styled');
+    $styledSelect.text($this.children('option').eq(0).text());
+
+    var $list = $('<ul />', {
+        'class': 'select-options'
+    }).insertAfter($styledSelect);
+
+    for (var i = 0; i < numberOfOptions; i++) {
+        $('<li />', {
+            text: $this.children('option').eq(i).text(),
+            rel: $this.children('option').eq(i).val()
+        }).appendTo($list);
+    }
+
+    var $listItems = $list.children('li');
+
+    $styledSelect.click(function(e) {
+        e.stopPropagation();
+        $('div.select-styled.active').not(this).each(function(){
+            $(this).removeClass('active').next('ul.select-options').hide();
+        });
+        $(this).toggleClass('active').next('ul.select-options').toggle();
+    });
+
+    $listItems.click(function(e) {
+        e.stopPropagation();
+        $styledSelect.text($(this).text()).removeClass('active');
+        $this.val($(this).attr('rel'));
+        $list.hide();
+        //console.log($this.val());
+    });
+
+    $(document).click(function() {
+        $styledSelect.removeClass('active');
+        $list.hide();
+    });
+
+});
+</script>
+
+<script src="https://www.amcharts.com/lib/4/lang/pt_BR.js"></script>
+<script>
+
+
+    //Grafico
+
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+
+    // Create chart instance
+    var chart = am4core.create("chartdiv", am4charts.XYChart);
+    chart.language.locale = am4lang_pt_BR;
+
+    // Add data
+    chart.data = generatechartData();
+
+    function generatechartData() {
+        var chartData = [];
+
+        {% for recebido in todos_recebidos%}
+
+        var valor = "{{recebido.entradas}}".replace(".","").replace(",",".");
+        valor = parseFloat(valor);
+
+        var data = new Date('{{recebido.data_movimento|escapejs}}');
+        data.setDate(data.getDate() + 1);
+
+        chartData.push({
+            data: data,
+            valor: valor
+        });
+
+        {% endfor %}
+
+        return chartData;
+    }
+
+    // Create axes
+    var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    dateAxis.startLocation = 0.5;
+    dateAxis.endLocation = 0.5;
+
+    // Create value axis
+    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+    // Create series
+    var series = chart.series.push(new am4charts.LineSeries());
+    series.dataFields.valueY = "valor";
+    series.dataFields.dateX = "data";
+    series.strokeWidth = 3;
+    series.tooltipText = "{valueY.value}";
+    series.fillOpacity = 0.1;
+
+    // Create a range to change stroke for values below 0
+    var range = valueAxis.createSeriesRange(series);
+    range.value = 0;
+    range.endValue = -1000;
+    range.contents.stroke = chart.colors.getIndex(4);
+    range.contents.fill = range.contents.stroke;
+    range.contents.strokeOpacity = 0.7;
+    range.contents.fillOpacity = 0.1;
+
+    // Add cursor
+    chart.cursor = new am4charts.XYCursor();
+    chart.cursor.xAxis = dateAxis;
+    chart.scrollbarX = new am4core.Scrollbar();
+
+
+    // Fim gráfico
+
+
+
+
+    // <!--Start of Tawk.to Script-->
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/5c75ed093341d22d9ce64bca/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+    <!--End of Tawk.to Script-->
+
+</script>
+
+{%endblock%}
+

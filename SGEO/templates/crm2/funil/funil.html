@@ -1,0 +1,93 @@
+{%extends 'base/base.html'%}
+
+{%block title%}{{title_complete|title}}{%endblock%}
+{%block content%}
+<section class="content" id="funil">
+    <div class="container-fluid">
+
+        <div id="graficos" class="row">
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class='widget-graph widget--3x1'>
+                    <!--<header class='widget-header'>
+                        <div class='widget-header-indicator'></div>
+                    </header> -->
+                    <div class='widget-content'>
+                        <canvas id="line-chart-funil"></canvas>
+                    </div>
+                    <!--<footer class='widget-footer'>
+                        <a class='fa fa-trash-o'></a>
+                        <a class='fa fa-cog'></a>
+                    </footer>-->
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class='widget-graph widget--3x1'>
+                    <!--<header class='widget-header'>
+                        <div class='widget-header-indicator'></div>
+                    </header> -->
+                    <div class='widget-content'>
+                        <canvas id="line-chart-funil-valores"></canvas>
+                    </div>
+                    <!--<footer class='widget-footer'>
+                        <a class='fa fa-trash-o'></a>
+                        <a class='fa fa-cog'></a>
+                    </footer>-->
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+
+                <!-- START WIDGET SLIDER -->
+                <div class="widget widget-default widget-carousel widget1">
+                    <div>
+                        <div class="widget-title">Valor de oportunidades total do mês</div>
+                        <div class="widget-subtitle"></div>
+                        <div class="widget-int">R$ 8.903,60</div>
+                        <div class="widget-subtitle widget-buttons">35% de aumento com mês anterior</div>
+                    </div>
+                </div>
+                <!-- END WIDGET SLIDER -->
+            </div>
+
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+
+                <!-- START WIDGET MESSAGES -->
+                <div class="widget widget-default widget-carousel widget2">
+                    <div>
+                        <div class="widget-title">Quantidade de oportunidades total do mês</div>
+                        <div class="widget-subtitle"></div>
+                        <div class="widget-int">92</div>
+                        <div class="widget-subtitle widget-buttons">10% de aumento com mês anterior</div>
+                    </div>
+                </div>
+                <!-- END WIDGET MESSAGES -->
+
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="widget-graph widget--2x1">
+                    <canvas id="pie-chart-funil" width="800" height="406"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    </div>
+</section>
+
+
+{%endblock%}
+
+{% block js %}
+
+<script type="text/javascript">
+    $.Admin.graficosFunil.init();
+</script>
+
+{% endblock %}

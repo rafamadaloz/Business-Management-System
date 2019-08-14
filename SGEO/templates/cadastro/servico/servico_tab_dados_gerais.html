@@ -1,0 +1,94 @@
+<div class="col-sm-6">
+  <div class="form-group">
+    <div class="form-line">
+      <label>{{form.codigo.label}}</label><strong style="color:red;"> *</strong>
+      {% if form.codigo.errors %}<label class="error">{% for error in form.codigo.errors %}{{error}}{% endfor %}</label>{% endif %}
+      {{form.codigo}}
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <div class="form-line">
+      <label>{{form.descricao.label}}</label><strong style="color:red;"> *</strong>
+      {% if form.descricao.errors %}<label class="error">{% for error in form.descricao.errors %}{{error}}{% endfor %}</label>{% endif %}
+      {{form.descricao}}
+    </div>
+  </div>
+</div>
+
+
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <div class="form-line">
+      <label>{{form.tipo.label}}</label><strong style="color:red;"> *</strong>
+      {% if form.tipo.errors %}<label class="error">{% for error in form.tipo.errors %}{{error}}{% endfor %}</label>{% endif %}
+      <div class="select-container">
+        {{form.tipo}}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <label>{{form.categoria.label}}</label>
+      {% if form.categoria.errors %}<label class="error">{% for error in form.categoria.errors %}{{error}}{% endfor %}</label>{% endif %}
+    <div class="input-group">
+      <div class="form-line">
+        {{form.categoria}}
+      </div>
+      <a class="input-group-addon popup" style="color: green;" title="Adicionar categoria" href="{% url 'cadastro:addcategoriaview' %}"><i class="material-icons add-new-icon" title="Adicionar">&#xE147;</i></a>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-sm-12">
+  <div class="col-sm-3">
+    <div class="form-group">
+      <div class="form-line">
+        <label>{{form.valor_venda.label}}</label>
+        {% if form.valor_venda.errors %}<label class="error">{% for error in form.valor_venda.errors %}{{error}}{% endfor %}</label>{% endif %}
+        {{form.valor_venda}}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-group">
+      <div class="form-line">
+        <label>{{form.valor_custo.label}}</label>
+        {% if form.valor_custo.errors %}<label class="error">{% for error in form.valor_custo.errors %}{{error}}{% endfor %}</label>{% endif %}
+        {{form.valor_custo}}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-group">
+
+        <label>Margem de lucro (aprox.)</label>
+        <span id="margem-lucro" style="display:block;font-size: x-large;padding-left: 10px;color: yellowgreen;">0%</span>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <div class="form-line">
+      <label>{{form.inf_adicionais.label}}</label>
+      {% if form.inf_adicionais.errors %}<label class="error">{% for error in form.inf_adicionais.errors %}{{error}}{% endfor %}</label>{% endif %}
+      {{form.inf_adicionais}}
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6" style="margin-bottom: 17px;margin-top: 5px;">
+  {{form.status_ativo}}
+  <label for="id_status_ativo" style="font-weight: bold;" title="Se o serviço não estiver ativo, não será possível vende-lo.">{{ form.status_ativo.label }}</label>
+</div>

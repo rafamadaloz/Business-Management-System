@@ -1,0 +1,275 @@
+<!-- Body-->
+<div class="body">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#tab_dados_oportunidade" data-toggle="tab">DADOS DA OPORTUNIDADE</a></li>
+            <li role="presentation"><a href="#tab_descricao" data-toggle="tab">DESCRIÇÃO</a></li>
+            <li role="presentation"><a href="#tab_etiquetas" data-toggle="tab">ETIQUETAS</a></li>
+            <li role="presentation"><a href="#tab_contato" data-toggle="tab">CONTATO</a></li>
+        </ul>
+
+        <div class="tab-content">
+
+            <!-- Tab DADOS DA OPORTUNIDADE -->
+            <div role="tabpanel" class="tab-pane active" id="tab_dados_oportunidade">
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>{{form.empresa.label}}</label><strong style="color:red;"> *</strong>
+                        {% if form.empresa.errors %}<label class="error">{% for error in form.empresa.errors %}{{error}}{% endfor %}</label>{% endif %}
+                        <div class="input-group" style="margin-bottom: 0px;">
+                            <div class="form-line">
+                                {{form.empresa}}
+                            </div>
+                            <a class="input-group-addon newwindow" style="color: green;" title="Adicionar empresa" href="{% url 'cadastro:addempresaview' %}"><i class="material-icons add-new-icon" title="Adicionar empresa">&#xE147;</i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>{{form.cliente.label}}</label><strong style="color:red;"> *</strong>
+                        {% if form.cliente.errors %}<label class="error">{% for error in form.cliente.errors %}{{error}}{% endfor %}</label>{% endif %}
+                        <div class="input-group" style="margin-bottom: 0px;">
+                            <div class="form-line">
+                                {{form.cliente}}
+                            </div>
+                            <a class="input-group-addon newwindow" style="color: green;" title="Adicionar cliente" href="{% url 'cadastro:addclienteview' %}"><i class="material-icons add-new-icon" title="Adicionar cliente">&#xE147;</i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label {% for error in form.categoria.errors %}title="{{error}}"{% endfor %}>{{form.categoria.label}}</label>
+                            {% if form.categoria.errors %}<label class="error"></label>{% endif %}
+                            {{form.categoria}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.responsavel.label}}</label>
+                            {% if form.responsavel.errors %}<label class="error">{% for error in form.responsavel.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.responsavel}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- #Tab INFORMAÇÕES -->
+
+
+            <div role="tabpanel" class="tab-pane" id="tab_descricao">
+                <div class="col-sm-12">
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label>{{form.data_abertura.label}}</label>
+                                {% if form.data_abertura.errors %}<label class="error">{% for error in form.data_abertura.errors %}{{error}}{% endfor %}</label>{% endif %}
+                                {{form.data_abertura}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label>{{form.data_fechamento.label}}</label>
+                                {% if form.data_fechamento.errors %}<label class="error">{% for error in form.data_fechamento.errors %}{{error}}{% endfor %}</label>{% endif %}
+                                {{form.data_fechamento}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label {% for error in form.probabilidade_fechamento.errors %}title="{{error}}"{% endfor %}>{{form.probabilidade_fechamento.label}}</label>
+                                {% if form.probabilidade_fechamento.errors %}<label class="error"></label>{% endif %}
+                                {{form.probabilidade_fechamento}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label {% for error in form.valor.errors %}title="{{error}}"{% endfor %}>{{form.valor.label}}</label>
+                                {% if form.valor.errors %}<label class="error"></label>{% endif %}
+                                {{form.valor}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label>{{form.origem.label}}</label>
+                                {% if form.origem.errors %}<label class="error">{% for error in form.origem.errors %}{{error}}{% endfor %}</label>{% endif %}
+                                {{form.origem}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label {% for error in form.nome_origem.errors %}title="{{error}}"{% endfor %}>{{form.nome_origem.label}}</label>
+                                {% if form.nome_origem.errors %}<label class="error"></label>{% endif %}
+                                {{form.nome_origem}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>{{form.status_venda.label}}</label>
+                            {% if form.status_venda.errors %}<label class="error">{% for error in form.status_venda.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            <div class="input-group" style="margin-bottom: 0px;">
+                                <div class="form-line">
+                                    {{form.status_venda}}
+                                </div>
+                                <a class="input-group-addon newwindow" style="color: green;" title="Adicionar status de venda" href="{% url 'cadastro:addstatusvendaview' %}"><i class="material-icons add-new-icon" title="Adicionar status de venda">&#xE147;</i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label {% for error in form.situacao.errors %}title="{{error}}"{% endfor %}>{{form.situacao.label}}</label>
+                                {% if form.situacao.errors %}<label class="error"></label>{% endif %}
+                                {{form.situacao}}
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    {% if form.situacao == '1' %}
+
+
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label {% for error in form.data_cancelamento.errors %}title="{{error}}"{% endfor %}>{{form.data_cancelamento.label}}</label>
+                                {% if form.data_cancelamento.errors %}<label class="error"></label>{% endif %}
+                                {{form.data_cancelamento}}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endif %}
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label {% for error in form.data_sucesso.errors %}title="{{error}}"{% endfor %}>{{form.data_sucesso.label}}</label>
+                                {% if form.data_sucesso.errors %}<label class="error"></label>{% endif %}
+                                {{form.data_sucesso}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label {% for error in form.motivo_cancelamento.errors %}title="{{error}}"{% endfor %}>{{form.motivo_cancelamento.label}}</label>
+                                {% if form.motivo_cancelamento.errors %}<label class="error"></label>{% endif %}
+                                {{form.motivo_cancelamento}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Tab etiquetas -->
+            <div role="tabpanel" class="tab-pane formset-tab" id="tab_etiquetas">
+
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>{{form.etiquetas.label}}</label>
+                        {% if form.etiquetas.errors %}<label class="error">{% for error in form.etiquetas.errors %}{{error}}{% endfor %}</label>{% endif %}
+                        <div class="input-group" style="margin-bottom: 0px;">
+                            <div class="form-line">
+                                {{form.etiquetas}}
+                            </div>
+                            <a class="input-group-addon popup" style="color: green;" title="Adicionar etiquetas" href="{% url 'crm2:addetiquetaview' %}"><i class="material-icons add-new-icon" title="Adicionar etiquetas">&#xE147;</i></a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- #Tab etiquetas -->
+
+            <!-- Tab contato -->
+            <div role="tabpanel" class="tab-pane formset-tab" id="tab_contato">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>Email</label>
+                            <span type="text" class="form-control display-cliente-field" id="email_cliente"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>Telefone (Cliente)</label>
+                            <span type="text" class="form-control display-cliente-field" id="telefone_cliente"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>Telefone (Empresa)</label>
+                            <span type="text" class="form-control display-cliente-field" id="telefone_empresa"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>Site</label>
+                            <span type="text" class="form-control display-cliente-field" id="site_cliente"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- #Tab contato -->
+
+
+        </div>
+
+    </div>
+
+    <button class="btn btn-success foot-btn" type="submit"><i class="material-icons">&#xE148;</i><span> SALVAR</span></button>
+
+</div>
+<!--#Body-->
+
+{% block js %}
+<script>
+
+    $("#id_etiquetas").select2({ width: '500px' });
+
+</script>
+
+
+{% endblock %}

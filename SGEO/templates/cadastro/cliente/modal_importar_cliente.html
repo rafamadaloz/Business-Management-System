@@ -1,0 +1,85 @@
+<!-- Modal escolher arquivo xml para importacao de nfes -->
+<div class="modal fade importar_cliente_modal">
+  <div class="modal-dialog modal-lg">
+    <form id="form_importar_cliente" action="{{importar_cliente_url}}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">IMPORTAÇÃO DE CLIENTE</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+
+            <style type="text/css">
+              .informacoes_para_importar b{
+                  margin-left: 30px;
+              }
+
+            </style>
+            <!-- SELECIONAR ARQUIVO XML -->
+            <div class="row">
+              <div class="col-md-12 informacoes_para_importar">
+              <p>
+                Tipo de pessoa:<br>
+                <b>PF</b> para pessoa física <br>
+                <b>PJ</b> para pessoa jurídica<br>
+                Situação fiscal:<br>
+                    <b>LP</b> para Lucro Presumido<br>
+                    <b>LR</b> para Lucro Real<br>
+                    <b>SN</b> para Simples Nacional<br>
+                    <b>SE</b> para Simples Nacional, excesso sublimite de receita bruta<br>
+                Sexo:<br>
+                    <b>M</b> para Masculino<br>
+                    <b>F</b> para Feminino<br>
+                    <b>O</b> para Outro<br>
+                Nascimento formato:<br>
+                    <b>DD/MM/AAAA</b><br>
+                Indicador da IE do Destinatário:<br>
+                    <b>1</b> para Contribuinte ICMS<br>
+                    <b>2</b> para Contribuinte Isento de Inscrição<br>
+                    <b>9</b> para Não Contribuinte<br>
+                Ativo:<br>
+                    <b>1</b> para Ativo<br>
+                    <b>0</b> para Não Ativo<br>
+                Banco:<br>
+                    <b>*</b> Consultar tabela do código do banco<br>
+              </p>
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <div class="form-line">
+                    <label>Arquivo .csv</label>
+                    <input class="form-control" id="file" name="file" type="file" required/>
+                  </div>
+                </div>
+              </div>
+<!--                <div class="col-sm-4">-->
+<!--                <div class="form-group">-->
+<!--                  <div class="form-line">-->
+<!--                    <a class="btn btn-default" style="margin-top: 30px" href="/media/arquivos/base_importacao/importar_clientes.csv">Download do arquivo </a>-->
+<!--                </div>-->
+<!--          </div>-->
+        </div>
+
+            </div>
+            <!-- #SELECIONAR ARQUIVO XML -->
+
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">FECHAR</button>
+          <button type="submit" class="btn btn-primary" id="importar_cliente_btn">IMPORTAR</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- #-->

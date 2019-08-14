@@ -1,0 +1,255 @@
+{%extends 'base/base.html'%}
+
+{%block title%}Alterar Plano{%endblock%}
+{%block content%}
+<section class="content">
+    <div class="container-fluid block">
+
+
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <a href="{% url 'login:perfilview' %}"><i class="material-icons">&#xE5C4;</i></a>
+                    ALTERAR PLANO
+                </h2>
+                <div>
+                    <small>Campos marcados com <strong style="color:red;">*</strong> são obrigatórios.</small>
+                </div>
+            </div>
+
+            <form id="altera_plano" role="form" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- Body-->
+                <div class="body">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#plano" data-toggle="tab">PLANO</a></li>
+                            <li role="presentation"><a href="#adicionais" data-toggle="tab">ADICIONAIS</a></li>
+                            <li role="presentation"><a href="#resumo" data-toggle="tab">RESUMO DA COMPRA</a></li>
+                            <li role="presentation"><a href="#pagamento" data-toggle="tab">PAGAMENTO</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <!-- Tab informacoes gerais -->
+                            <div role="tabpanel" class="tab-pane active" id="plano">
+                                <div id="price_page">
+                                    <div class="escolher-planos row ">
+                                        <div class="div-planos col-xs-12 col-sm-6 col-md-6 col-lg-4 ">
+                                            <input type="radio" id="mes" onclick="mudaMes()" name="select" value="2">
+                                            <label for="mes">
+                                                <p>Plano Mensal</p>
+                                            </label>
+                                        </div>
+                                        <div class="div-planos col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                            <input type="radio" id="ano" onclick="mudaAno()" name="select" value="3"
+                                                   checked>
+                                            <label for="ano">
+                                                <p>Plano Anual</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row planos-boxes">
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="price-box" tabindex="gratis">
+                                                <div class="price-header">
+                                                    <div class="price-icon">
+                                                        <span class="lnr lnr-rocket"></span>
+                                                    </div>
+                                                    <h4 class="upper">Grátis</h4>
+                                                </div>
+                                                <div class="price-rate">
+                                                    <sup>R&#36;</sup> <span class="rate">...</span>
+                                                    <small>/ Mês</small>
+                                                </div>
+                                                <div class="price-body">
+                                                    <ul>
+                                                        <li>Gestão de Compras</li>
+                                                        <li>Gestão de Vendas</li>
+                                                        <li>Gestão de Estoque</li>
+                                                        <li>Cadastros ilimitados</li>
+                                                        <li>1 usuário</li>
+                                                        <li>NF-e (até 15)</li>
+                                                        <li>NFC-e (até 15)</li>
+                                                        <li>Importação de XML</li>
+                                                        <li>Comunicação Segura</li>
+                                                        <li>Cálculo automático dos impostos</li>
+                                                        <li>Utiliza Certificado Digital A1</li>
+                                                        <li><strike>Relatórios e Gráficos</strike></li>
+                                                        <li><strike>Suporte Técnico</strike></li>
+                                                        <li><strike>Armazenamento</strike></li>
+                                                        <li><strike>Backup</strike></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="space-30 hidden visible-xs"></div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="price-box" tabindex="pro">
+                                                <div class="price-header">
+                                                    <span class="saleon">recomendado</span>
+                                                    <div class="price-icon">
+                                                        <span class="ion-trophy"></span>
+                                                    </div>
+                                                    <h4 class="upper">pro</h4>
+                                                </div>
+                                                <div class="price-rate">
+                                                    <sup>R&#36;</sup> <span id="preco_pro" class="rate">...</span>
+                                                    <small>/ Mês</small>
+                                                </div>
+                                                <div class="price-body">
+                                                    <ul>
+                                                        <li>Gestão de Compras</li>
+                                                        <li>Gestão de Vendas</li>
+                                                        <li>Gestão de Estoque</li>
+                                                        <li>Cadastros ilimitados</li>
+                                                        <li>3 usuários</li>
+                                                        <li>NF-e (até 1000)</li>
+                                                        <li>NFC-e (até 1000)</li>
+                                                        <li>Importação de XML</li>
+                                                        <li>Comunicação Segura</li>
+                                                        <li>Cálculo automático dos impostos</li>
+                                                        <li>Utiliza Certificado Digital A1</li>
+                                                        <li>Relatórios e Gráficos</li>
+                                                        <li>Suporte Técnico</li>
+                                                        <li>Armazenamento</li>
+                                                        <li>Backup</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="space-30 hidden visible-xs"></div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="price-box" tabindex="premium">
+                                                <div class="price-header">
+                                                    <div class="price-icon">
+                                                        <span class="lnr lnr-diamond"></span>
+                                                    </div>
+                                                    <h4 class="upper">premium</h4>
+                                                </div>
+                                                <div class="price-rate">
+                                                    <sup>R&#36;</sup> <span id="preco_premium" class="rate">...</span>
+                                                    <small>/ Mês</small>
+                                                </div>
+                                                <div class="price-body">
+                                                    <ul>
+                                                        <li>Gestão de Compras</li>
+                                                        <li>Gestão de Vendas</li>
+                                                        <li>Gestão de Estoque</li>
+                                                        <li>Cadastros ilimitados</li>
+                                                        <li>7 usuários</li>
+                                                        <li>NF-e (até 3000)</li>
+                                                        <li>NFC-e (até 3000)</li>
+                                                        <li>Importação de XML</li>
+                                                        <li>Comunicação Segura</li>
+                                                        <li>Cálculo automático dos impostos</li>
+                                                        <li>Utiliza Certificado Digital A1</li>
+                                                        <li>Relatórios e Gráficos</li>
+                                                        <li>Suporte Técnico</li>
+                                                        <li>Armazenamento</li>
+                                                        <li>Backup</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="btn btn-success foot-btn" style="margin-right:0px;" href="#adicionais"><i
+                                        class="material-icons">&#xE3C9;</i><span> PRÓXIMO</span></a>
+
+                            </div>
+                            <!-- #Tab informacoes gerais -->
+
+
+                            <div role="tabpanel" class="tab-pane formset-tab" id="adicionais">
+
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label>{{form.notas_adicional.label}}</label><strong style="color:red;">
+                                        *</strong>
+
+                                        {{form.notas_adicional}}
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label>Valor</label>
+                                            <span class="form-control display-plano-field"
+                                                  id="valor_notas_adicional"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label>{{form.usuarios_adicional.label}}</label><strong style="color:red;">
+                                        *</strong>
+
+                                        {{form.usuarios_adicional}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label>Valor</label>
+                                            <span class="form-control display-plano-field"
+                                                  id="valor_usuarios_adicional"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- Tab endereco -->
+                            <div role="tabpanel" class="tab-pane formset-tab" id="resumo">
+
+
+                            </div>
+                            <!-- #Tab endereco -->
+
+
+                            <!-- Tab contato -->
+                            <div role="tabpanel" class="tab-pane formset-tab" id="pagamento">
+
+                                <button class="btn btn-success foot-btn" type="submit"><i
+                                        class="material-icons">&#xE148;</i><span> SALVAR</span></button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--#Body-->
+            </form>
+
+
+            <div class="body">
+                <form role="form" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</section>
+
+<script>
+
+    var req_urls = {}
+    $.Admin.vendaForm.init(req_urls);
+</script>
+
+
+{%endblock%}
+

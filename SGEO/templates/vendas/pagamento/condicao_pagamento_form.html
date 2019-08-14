@@ -1,0 +1,117 @@
+<!-- Body-->
+<div class="body">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.descricao.label}}</label>{% if form.descricao.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.descricao.errors %}<label class="error">{% for error in form.descricao.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.descricao}}
+            </div>
+          </div>
+        </div>
+
+      <div class="col-sm-6">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.forma.label}}</label>{% if form.forma.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.forma.errors %}<label class="error">{% for error in form.forma.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.forma}}
+            </div>
+          </div>
+        </div>
+
+      <div class="col-sm-6">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.n_parcelas.label}}</label>{% if form.n_parcelas.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.n_parcelas.errors %}<label class="error">{% for error in form.n_parcelas.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.n_parcelas}}
+            </div>
+          </div>
+        </div>
+
+      <div class="col-sm-6" id="dia_pagamento">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.dia_pagamento.label}}</label>{% if form.dia_pagamento.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.dia_pagamento.errors %}<label class="error">{% for error in form.dia_pagamento.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.dia_pagamento}}
+            </div>
+          </div>
+        </div>
+
+      <div class="col-sm-6" id="dias_recorrencia">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.dias_recorrencia.label}}</label>{% if form.dias_recorrencia.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.dias_recorrencia.errors %}<label class="error">{% for error in form.dias_recorrencia.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.dias_recorrencia}}
+            </div>
+          </div>
+        </div>
+
+      <div class="col-sm-6" id="parcela_inicial">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.parcela_inicial.label}}</label>{% if form.parcela_inicial.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.parcela_inicial.errors %}<label class="error">{% for error in form.parcela_inicial.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.parcela_inicial}}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-6" style="margin-bottom: 17px;margin-top: 30px;">
+            {{form.flag_dia_pagamento}}
+            <label for="id_flag_dia_pagamento" style="font-weight: bold;" title="Escolha um dia específico de todo mês para o pagamento">{{ form.flag_dia_pagamento.label }}</label>
+        </div>
+
+
+  </div>
+
+  <button class="btn btn-success foot-btn" type="submit"><i class="material-icons">&#xE148;</i><span> SALVAR</span></button>
+</div>
+<!--#Body-->
+
+{% block js %}
+
+    <script>
+
+        verifica_check();
+
+        $("#id_flag_dia_pagamento").click(function () {
+            if ( $(this).is(':checked') ){
+                $("#parcela_inicial").hide();
+                $("#dias_recorrencia").hide();
+                $("#dia_pagamento").show();
+          } else {
+                $("#parcela_inicial").show();
+                $("#dias_recorrencia").show();
+                $("#dia_pagamento").hide();
+          }
+        });
+
+
+
+
+        function verifica_check() {
+            if ($('#id_flag_dia_pagamento').attr('checked')) {
+                $("#parcela_inicial").hide();
+                $("#dias_recorrencia").hide();
+                $("#dia_pagamento").show();
+            } else {
+                $("#parcela_inicial").show();
+                $("#dias_recorrencia").show();
+                $("#dia_pagamento").hide();
+
+            }
+        }
+
+
+
+
+  </script>
+
+{% endblock %}

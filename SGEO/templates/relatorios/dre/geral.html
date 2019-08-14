@@ -1,0 +1,508 @@
+{%extends 'base/base.html'%}
+
+{%block title%}{{title_complete|title}}{%endblock%}
+{%block content%}
+<section class="content">
+  <div class="container-fluid lista">
+
+    {% include 'base/msg_sucesso.html' %}
+    {% include 'base/msg_error.html' %}
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lista-content">
+      <div class="card">
+
+        <div class="header">
+          <h2>
+            {{title_complete}}
+          </h2>
+        </div>
+
+        <!-- Body -->
+        <div class="body">
+
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <!--<div class="row" style="border-bottom: 1px solid #afabab;margin-bottom: 17px;">
+              <h4 style="border-bottom: 1px solid #afabab;">Filtrar</h4>
+              <form role="form" action="{% url 'estoque:consultaestoqueview' %}" method="get">
+              {% csrf_token %}
+                <div class="col-sm-5">
+                  <div class="form-group">
+                    <div class="form-line">
+                      <label>Produto</label>
+                      <select class="form-control" id="produto_id" name="produto">
+                        <option value="">Todos</option>
+                      {% for produto in todos_produtos %}
+                          <option value="{{ produto.id }}" {% ifequal produto.id|stringformat:"s" request.GET.produto %}selected{% endifequal %}>{{ produto }}</option>
+                      {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-5">
+                  <div class="form-group">
+                    <div class="form-line">
+                      <label>Local de estoque</label>
+                      <select class="form-control" id="local_id" name="local">
+                        <option value="">Todos</option>
+                      {% for local in todos_locais %}
+                          <option value="{{ local.id }}" {% ifequal local.id|stringformat:"s" request.GET.local %}selected{% endifequal %}>{{ local }}</option>
+                      {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <button style="margin-top:25px;" class="btn btn-primary foot-btn" type="submit">BUSCAR</button>
+                </div>
+
+              </form>
+
+            </div> -->
+
+            <div class="table-responsive" style="overflow-x: auto; white-space: nowrap;">
+              <table class="table table-bordered table-striped lista-table" id="table-dre">
+                <thead>
+                  <tr>
+                    <th>DRE 2019</th>
+                    <th>Jan</th>
+                    <th>Fev</th>
+                    <th>Mar</th>
+                    <th>Abr</th>
+                    <th>Mai</th>
+                    <th>Jun</th>
+                    <th>Jul</th>
+                    <th>Ago</th>
+                    <th>Set</th>
+                    <th>Out</th>
+                    <th>Nov</th>
+                    <th>Dez</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr colspan="6" style="background-color: rgba(104,177,237,0.26)" class="negrito prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>(+) RECEITA OPERACIONAL BRUTA</td>
+                    <td>R$ {{vendas_produtos_mercadorias_jan}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_fev}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_mar}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_abr}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_mai}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_jun}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_jul}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_ago}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_set}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_out}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_nov}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_dez}}</td>
+                  </tr>
+                  <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Vendas de produtos/mercadorias</td>
+                    <td>R$ {{vendas_produtos_mercadorias_jan}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_fev}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_mar}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_abr}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_mai}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_jun}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_jul}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_ago}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_set}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_out}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_nov}}</td>
+                    <td>R$ {{vendas_produtos_mercadorias_dez}}</td>
+                  </tr>
+
+                  <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Vendas de serviços</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                  </tr>
+
+                  <tr colspan="6" style="background-color: rgba(104,177,237,0.26)" class="negrito prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>(-) DEDUÇÕES DA RECEITA BRUTA</td>
+                    <td>R$ {{deducoes_receita_bruta_jan}}</td>
+                    <td>R$ {{deducoes_receita_bruta_fev}}</td>
+                    <td>R$ {{deducoes_receita_bruta_mar}}</td>
+                    <td>R$ {{deducoes_receita_bruta_abr}}</td>
+                    <td>R$ {{deducoes_receita_bruta_mai}}</td>
+                    <td>R$ {{deducoes_receita_bruta_jun}}</td>
+                    <td>R$ {{deducoes_receita_bruta_jul}}</td>
+                    <td>R$ {{deducoes_receita_bruta_ago}}</td>
+                    <td>R$ {{deducoes_receita_bruta_set}}</td>
+                    <td>R$ {{deducoes_receita_bruta_out}}</td>
+                    <td>R$ {{deducoes_receita_bruta_nov}}</td>
+                    <td>R$ {{deducoes_receita_bruta_dez}}</td>
+                    <td></td>
+                  </tr>
+
+                  <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Devoluções de vendas</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                  </tr>
+
+                  <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Abatimentos</td>
+                    <td>R$ {{abatimentos_jan}}</td>
+                    <td>R$ {{abatimentos_fev}}</td>
+                    <td>R$ {{abatimentos_mar}}</td>
+                    <td>R$ {{abatimentos_abr}}</td>
+                    <td>R$ {{abatimentos_mai}}</td>
+                    <td>R$ {{abatimentos_jun}}</td>
+                    <td>R$ {{abatimentos_jul}}</td>
+                    <td>R$ {{abatimentos_ago}}</td>
+                    <td>R$ {{abatimentos_set}}</td>
+                    <td>R$ {{abatimentos_out}}</td>
+                    <td>R$ {{abatimentos_nov}}</td>
+                    <td>R$ {{abatimentos_dez}}</td>
+                  </tr>
+
+                  <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Impostos sobre venda</td>
+                    <td>R$ {{impostos_jan}}</td>
+                    <td>R$ {{impostos_fev}}</td>
+                    <td>R$ {{impostos_mar}}</td>
+                    <td>R$ {{impostos_abr}}</td>
+                    <td>R$ {{impostos_mai}}</td>
+                    <td>R$ {{impostos_jun}}</td>
+                    <td>R$ {{impostos_jul}}</td>
+                    <td>R$ {{impostos_ago}}</td>
+                    <td>R$ {{impostos_set}}</td>
+                    <td>R$ {{impostos_out}}</td>
+                    <td>R$ {{impostos_nov}}</td>
+                    <td>R$ {{impostos_dez}}</td>
+                  </tr>
+
+                  <tr colspan="6" style="background-color: rgba(104,177,237,0.26)" class="negrito prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>(=) RECEITA OPERACIONAL LÍQUIDA</td>
+                    <td>R$ {{receita_operacional_liquida_jan}}</td>
+                    <td>R$ {{receita_operacional_liquida_fev}}</td>
+                    <td>R$ {{receita_operacional_liquida_mar}}</td>
+                    <td>R$ {{receita_operacional_liquida_abr}}</td>
+                    <td>R$ {{receita_operacional_liquida_mai}}</td>
+                    <td>R$ {{receita_operacional_liquida_jun}}</td>
+                    <td>R$ {{receita_operacional_liquida_jul}}</td>
+                    <td>R$ {{receita_operacional_liquida_ago}}</td>
+                    <td>R$ {{receita_operacional_liquida_set}}</td>
+                    <td>R$ {{receita_operacional_liquida_out}}</td>
+                    <td>R$ {{receita_operacional_liquida_nov}}</td>
+                    <td>R$ {{receita_operacional_liquida_dez}}</td>
+                  </tr>
+
+                  <tr colspan="6" style="background-color: rgba(104,177,237,0.26)" class="negrito prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>(-) CUSTOS DAS MERCADORIAS E SERVIÇOS</td>
+                    <td>R$ {{custos_jan}}</td>
+                    <td>R$ {{custos_fev}}</td>
+                    <td>R$ {{custos_mar}}</td>
+                    <td>R$ {{custos_abr}}</td>
+                    <td>R$ {{custos_mai}}</td>
+                    <td>R$ {{custos_jun}}</td>
+                    <td>R$ {{custos_jul}}</td>
+                    <td>R$ {{custos_ago}}</td>
+                    <td>R$ {{custos_set}}</td>
+                    <td>R$ {{custos_out}}</td>
+                    <td>R$ {{custos_nov}}</td>
+                    <td>R$ {{custos_dez}}</td>
+                  </tr>
+
+                  <tr colspan="6" style="background-color: rgba(104,177,237,0.26)" class="negrito prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>(=) RESULTADO OPERACIONAL BRUTO</td>
+                    <td>R$ {{resultado_operacional_bruto_jan}}</td>
+                    <td>R$ {{resultado_operacional_bruto_fev}}</td>
+                    <td>R$ {{resultado_operacional_bruto_mar}}</td>
+                    <td>R$ {{resultado_operacional_bruto_abr}}</td>
+                    <td>R$ {{resultado_operacional_bruto_mai}}</td>
+                    <td>R$ {{resultado_operacional_bruto_jun}}</td>
+                    <td>R$ {{resultado_operacional_bruto_jul}}</td>
+                    <td>R$ {{resultado_operacional_bruto_ago}}</td>
+                    <td>R$ {{resultado_operacional_bruto_set}}</td>
+                    <td>R$ {{resultado_operacional_bruto_out}}</td>
+                    <td>R$ {{resultado_operacional_bruto_nov}}</td>
+                    <td>R$ {{resultado_operacional_bruto_dez}}</td>
+                  </tr>
+
+                  <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Margem bruta</td>
+                    <td>{{res_op_margem_jan}}%</td>
+                    <td>{{res_op_margem_fev}}%</td>
+                    <td>{{res_op_margem_mar}}%</td>
+                    <td>{{res_op_margem_abr}}%</td>
+                    <td>{{res_op_margem_mai}}%</td>
+                    <td>{{res_op_margem_jun}}%</td>
+                    <td>{{res_op_margem_jul}}%</td>
+                    <td>{{res_op_margem_ago}}%</td>
+                    <td>{{res_op_margem_set}}%</td>
+                    <td>{{res_op_margem_out}}%</td>
+                    <td>{{res_op_margem_nov}}%</td>
+                    <td>{{res_op_margem_dez}}%</td>
+                  </tr>
+
+                   <tr colspan="6" style="background-color: rgba(104,177,237,0.26)" class="negrito prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>(-) DESPESAS OPERACIONAIS</td>
+                    <td>R$ {{despesas_operacionais_jan}}</td>
+                    <td>R$ {{despesas_operacionais_fev}}</td>
+                    <td>R$ {{despesas_operacionais_mar}}</td>
+                    <td>R$ {{despesas_operacionais_abr}}</td>
+                    <td>R$ {{despesas_operacionais_mai}}</td>
+                    <td>R$ {{despesas_operacionais_jun}}</td>
+                    <td>R$ {{despesas_operacionais_jul}}</td>
+                    <td>R$ {{despesas_operacionais_ago}}</td>
+                    <td>R$ {{despesas_operacionais_set}}</td>
+                    <td>R$ {{despesas_operacionais_out}}</td>
+                    <td>R$ {{despesas_operacionais_nov}}</td>
+                    <td>R$ {{despesas_operacionais_dez}}</td>
+                  </tr>
+
+                 <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Despesas com vendas</td>
+                   <td>R$ {{despesas_com_vendas_jan}}</td>
+                    <td>R$ {{despesas_com_vendas_fev}}</td>
+                    <td>R$ {{despesas_com_vendas_mar}}</td>
+                    <td>R$ {{despesas_com_vendas_abr}}</td>
+                    <td>R$ {{despesas_com_vendas_mai}}</td>
+                    <td>R$ {{despesas_com_vendas_jun}}</td>
+                    <td>R$ {{despesas_com_vendas_jul}}</td>
+                    <td>R$ {{despesas_com_vendas_ago}}</td>
+                    <td>R$ {{despesas_com_vendas_set}}</td>
+                    <td>R$ {{despesas_com_vendas_out}}</td>
+                    <td>R$ {{despesas_com_vendas_nov}}</td>
+                    <td>R$ {{despesas_com_vendas_dez}}</td>
+                  </tr>
+
+                 <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Despesas administrativas</td>
+                    <td>R$ {{despesas_adm_jan}}</td>
+                    <td>R$ {{despesas_adm_fev}}</td>
+                    <td>R$ {{despesas_adm_mar}}</td>
+                    <td>R$ {{despesas_adm_abr}}</td>
+                    <td>R$ {{despesas_adm_mai}}</td>
+                    <td>R$ {{despesas_adm_jun}}</td>
+                    <td>R$ {{despesas_adm_jul}}</td>
+                    <td>R$ {{despesas_adm_ago}}</td>
+                    <td>R$ {{despesas_adm_set}}</td>
+                    <td>R$ {{despesas_adm_out}}</td>
+                    <td>R$ {{despesas_adm_nov}}</td>
+                    <td>R$ {{despesas_adm_dez}}</td>
+                  </tr>
+
+                 <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Pró-labore</td>
+                    <td>R$ {{despesas_prolabore_jan}}</td>
+                    <td>R$ {{despesas_prolabore_fev}}</td>
+                    <td>R$ {{despesas_prolabore_mar}}</td>
+                    <td>R$ {{despesas_prolabore_abr}}</td>
+                    <td>R$ {{despesas_prolabore_mai}}</td>
+                    <td>R$ {{despesas_prolabore_jun}}</td>
+                    <td>R$ {{despesas_prolabore_jul}}</td>
+                    <td>R$ {{despesas_prolabore_ago}}</td>
+                    <td>R$ {{despesas_prolabore_set}}</td>
+                    <td>R$ {{despesas_prolabore_out}}</td>
+                    <td>R$ {{despesas_prolabore_nov}}</td>
+                    <td>R$ {{despesas_prolabore_dez}}</td>
+                  </tr>
+
+                 <tr colspan="6" style="background-color: rgba(104,177,237,0.26)" class="negrito prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>(+/-) DESPESAS/RECEIRAS FINANCEIRAS</td>
+                    <td>R$ {{despesas_receitas_fin_jan}}</td>
+                    <td>R$ {{despesas_receitas_fin_fev}}</td>
+                    <td>R$ {{despesas_receitas_fin_mar}}</td>
+                    <td>R$ {{despesas_receitas_fin_abr}}</td>
+                    <td>R$ {{despesas_receitas_fin_mai}}</td>
+                    <td>R$ {{despesas_receitas_fin_jun}}</td>
+                    <td>R$ {{despesas_receitas_fin_jul}}</td>
+                    <td>R$ {{despesas_receitas_fin_ago}}</td>
+                    <td>R$ {{despesas_receitas_fin_set}}</td>
+                    <td>R$ {{despesas_receitas_fin_out}}</td>
+                    <td>R$ {{despesas_receitas_fin_nov}}</td>
+                    <td>R$ {{despesas_receitas_fin_dez}}</td>
+                  </tr>
+                 <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Receitas Financeiras</td>
+                    <td>R$ {{receitas_financeiras_jan}}</td>
+                    <td>R$ {{receitas_financeiras_fev}}</td>
+                    <td>R$ {{receitas_financeiras_mar}}</td>
+                    <td>R$ {{receitas_financeiras_abr}}</td>
+                    <td>R$ {{receitas_financeiras_mai}}</td>
+                    <td>R$ {{receitas_financeiras_jun}}</td>
+                    <td>R$ {{receitas_financeiras_jul}}</td>
+                    <td>R$ {{receitas_financeiras_ago}}</td>
+                    <td>R$ {{receitas_financeiras_set}}</td>
+                    <td>R$ {{receitas_financeiras_out}}</td>
+                    <td>R$ {{receitas_financeiras_nov}}</td>
+                    <td>R$ {{receitas_financeiras_dez}}</td>
+                  </tr>
+                  <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Despesas Financeiras</td>
+                    <td>R$ {{despesas_financeiras_jan}}</td>
+                    <td>R$ {{despesas_financeiras_fev}}</td>
+                    <td>R$ {{despesas_financeiras_mar}}</td>
+                    <td>R$ {{despesas_financeiras_abr}}</td>
+                    <td>R$ {{despesas_financeiras_mai}}</td>
+                    <td>R$ {{despesas_financeiras_jun}}</td>
+                    <td>R$ {{despesas_financeiras_jul}}</td>
+                    <td>R$ {{despesas_financeiras_ago}}</td>
+                    <td>R$ {{despesas_financeiras_set}}</td>
+                    <td>R$ {{despesas_financeiras_out}}</td>
+                    <td>R$ {{despesas_financeiras_nov}}</td>
+                    <td>R$ {{despesas_financeiras_dez}}</td>
+                  </tr>
+                   <tr colspan="6" style="background-color: rgba(104,177,237,0.26)" class="negrito prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>(+/-) OUTRAS DESPESAS/RECEIRAS</td>
+                    <td>R$ {{outras_despesas_receitas_jan}}</td>
+                    <td>R$ {{outras_despesas_receitas_fev}}</td>
+                    <td>R$ {{outras_despesas_receitas_mar}}</td>
+                    <td>R$ {{outras_despesas_receitas_abr}}</td>
+                    <td>R$ {{outras_despesas_receitas_mai}}</td>
+                    <td>R$ {{outras_despesas_receitas_jun}}</td>
+                    <td>R$ {{outras_despesas_receitas_jul}}</td>
+                    <td>R$ {{outras_despesas_receitas_ago}}</td>
+                    <td>R$ {{outras_despesas_receitas_set}}</td>
+                    <td>R$ {{outras_despesas_receitas_out}}</td>
+                    <td>R$ {{outras_despesas_receitas_nov}}</td>
+                    <td>R$ {{outras_despesas_receitas_dez}}</td>
+
+                  </tr>
+                 <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Outras Receitas</td>
+                    <td>R$ {{outras_receitas_jan}} </td>
+                    <td>R$ {{outras_receitas_fev}} </td>
+                    <td>R$ {{outras_receitas_mar}} </td>
+                    <td>R$ {{outras_receitas_abr}} </td>
+                    <td>R$ {{outras_receitas_mai}} </td>
+                    <td>R$ {{outras_receitas_jun}} </td>
+                    <td>R$ {{outras_receitas_jul}} </td>
+                    <td>R$ {{outras_receitas_ago}} </td>
+                    <td>R$ {{outras_receitas_set}} </td>
+                    <td>R$ {{outras_receitas_out}} </td>
+                    <td>R$ {{outras_receitas_nov}} </td>
+                    <td>R$ {{outras_receitas_dez}} </td>
+                  </tr>
+                  <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>Outras Despesas</td>
+                    <td>R$ {{outras_despesas_jan}} </td>
+                    <td>R$ {{outras_despesas_fev}} </td>
+                    <td>R$ {{outras_despesas_mar}} </td>
+                    <td>R$ {{outras_despesas_abr}} </td>
+                    <td>R$ {{outras_despesas_mai}} </td>
+                    <td>R$ {{outras_despesas_jun}} </td>
+                    <td>R$ {{outras_despesas_jul}} </td>
+                    <td>R$ {{outras_despesas_ago}} </td>
+                    <td>R$ {{outras_despesas_set}} </td>
+                    <td>R$ {{outras_despesas_out}} </td>
+                    <td>R$ {{outras_despesas_nov}} </td>
+                    <td>R$ {{outras_despesas_dez}} </td>
+
+                  </tr>
+                  <tr colspan="6" style="background-color: rgba(104,177,237,0.26)" class="negrito prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>(=) RESULTADO OPERACIONAL ANTES DO IR E CSLL</td>
+                    <td>R$ {{res_op_antes_ir_csll_jan}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_fev}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_mar}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_abr}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_mai}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_jun}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_jul}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_ago}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_set}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_out}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_nov}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_dez}}</td>
+                  </tr>
+                  <tr colspan="6" style="background-color: rgba(104,177,237,0.26)" class="negrito prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>(-) IR E CSLL</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                    <td>R$ 0</td>
+                  </tr>
+                 <tr colspan="6" style="background-color: rgba(104,177,237,0.26)" class="negrito prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>(=) RESULTADO LÍQUIDO DO EXÉRCÍTO</td>
+                   <td>R$ {{res_op_antes_ir_csll_jan}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_fev}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_mar}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_abr}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_mai}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_jun}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_jul}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_ago}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_set}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_out}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_nov}}</td>
+                    <td>R$ {{res_op_antes_ir_csll_dez}}</td>
+                  </tr>
+                  <tr colspan="6" style="background-color: white" class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{produto.id}}">
+                    <td>= Margem líquida</td>
+                    <td>{{margem_liquida_jan}}%</td>
+                    <td>{{margem_liquida_fev}}%</td>
+                    <td>{{margem_liquida_mar}}%</td>
+                    <td>{{margem_liquida_abr}}%</td>
+                    <td>{{margem_liquida_mai}}%</td>
+                    <td>{{margem_liquida_jun}}%</td>
+                    <td>{{margem_liquida_jul}}%</td>
+                    <td>{{margem_liquida_ago}}%</td>
+                    <td>{{margem_liquida_set}}%</td>
+                    <td>{{margem_liquida_out}}%</td>
+                    <td>{{margem_liquida_nov}}%</td>
+                    <td>{{margem_liquida_dez}}%</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- #Body -->
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+{%endblock%}
+
+{% block js %}
+
+  {% include 'base/load_jqueryui.html' %}
+
+  {% include 'base/datepicker_js.html' %}
+
+  {% include 'base/tooltip_js.html' %}
+
+   <script type="text/javascript">
+    $.Admin.fluxoCaixa.init();
+  </script>
+
+{% endblock %}

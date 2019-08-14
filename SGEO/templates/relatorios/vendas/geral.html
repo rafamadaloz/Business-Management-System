@@ -1,0 +1,249 @@
+
+
+{%extends 'base/base.html'%}
+
+{%block title%}{{title_complete|title}}{%endblock%}
+{%block content%}
+<section class="content">
+  <div class="container-fluid lista">
+
+    {% include 'base/msg_sucesso.html' %}
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lista-content">
+      <div class="card">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="header">
+            <h2>
+              {{title_complete}}
+            </h2>
+          </div>
+
+            <div class="body">
+
+                <div style="margin-top: 20px" class="col-md-12">
+                    <h5>Todos as vendas</h5>
+                    <div class="tabela" style="overflow-x: auto; white-space: nowrap;">
+                    {% load django_tables2 %}
+
+                    {% load render_table from django_tables2 %}
+                     {% load bootstrap3 %}
+
+                      {% if filter %}
+                            <form action="" method="get" class="form form-inline">
+                                {% bootstrap_form filter.form layout='inline' %}
+                                {% bootstrap_button 'filter' %}
+                            </form>
+                        {% endif %}
+
+                        <a href="{% export_url 'csv' %}">Link</a>
+
+                    {% render_table table %}
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+    </form>
+
+  </div>
+</div>
+
+</div>
+</section>
+
+
+{%endblock%}
+
+{% block js %}
+
+<!-- Chart code | MAIS VENDIDOS -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+// Add data
+chart.data = [
+
+    {% for produto in mais_vendidos %}
+
+      {
+        "state": "{{produto.descricao}}",
+        "sales": "{{produto.quantidade_vendida}}".replace(",",".")
+      },
+
+    {%endfor%}
+];
+
+
+// Create axes
+var yAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+yAxis.dataFields.category = "state";
+yAxis.renderer.grid.template.location = 0;
+yAxis.renderer.labels.template.fontSize = 10;
+yAxis.renderer.minGridDistance = 10;
+
+var xAxis = chart.xAxes.push(new am4charts.ValueAxis());
+
+// Create series
+var series = chart.series.push(new am4charts.ColumnSeries());
+series.dataFields.valueX = "sales";
+series.dataFields.categoryY = "state";
+series.columns.template.tooltipText = "{categoryY}: [bold]{valueX}[/]";
+series.columns.template.strokeWidth = 0;
+series.columns.template.adapter.add("fill", function(fill, target) {
+  if (target.dataItem) {
+    switch(target.dataItem.dataContext.region) {
+      case "Central":
+        return chart.colors.getIndex(0);
+        break;
+      case "East":
+        return chart.colors.getIndex(1);
+        break;
+      case "South":
+        return chart.colors.getIndex(2);
+        break;
+      case "West":
+        return chart.colors.getIndex(3);
+        break;
+    }
+  }
+  return fill;
+});
+
+// Add ranges
+function addRange(label, start, end, color) {
+  var range = yAxis.axisRanges.create();
+  range.category = start;
+  range.endCategory = end;
+  range.label.text = label;
+  range.label.disabled = false;
+  range.label.fill = color;
+  range.label.location = 0;
+  range.label.dx = -130;
+  range.label.dy = 12;
+  range.label.fontWeight = "bold";
+  range.label.fontSize = 12;
+  range.label.horizontalCenter = "left"
+  range.label.inside = true;
+
+  range.grid.stroke = am4core.color("#396478");
+  range.grid.strokeOpacity = 1;
+  range.tick.length = 200;
+  range.tick.disabled = false;
+  range.tick.strokeOpacity = 0.6;
+  range.tick.stroke = am4core.color("#396478");
+  range.tick.location = 0;
+
+  range.locations.category = 1;
+}
+
+
+chart.cursor = new am4charts.XYCursor();
+
+}); // end am4core.ready()
+</script>
+
+<!-- Chart code | MENOS VENDIDOS -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart2 = am4core.create("chartdiv_menos_vendidos", am4charts.XYChart);
+
+// Add data
+chart2.data = [
+
+    {% for produto in menos_vendidos %}
+
+      {
+        "state": "{{produto.descricao}}",
+        "sales": "{{produto.quantidade_vendida}}".replace(",",".")
+      },
+
+    {%endfor%}
+];
+
+
+// Create axes
+var yAxis = chart2.yAxes.push(new am4charts.CategoryAxis());
+yAxis.dataFields.category = "state";
+yAxis.renderer.grid.template.location = 0;
+yAxis.renderer.labels.template.fontSize = 10;
+yAxis.renderer.minGridDistance = 10;
+
+var xAxis = chart2.xAxes.push(new am4charts.ValueAxis());
+
+// Create series
+var series = chart2.series.push(new am4charts.ColumnSeries());
+series.dataFields.valueX = "sales";
+series.dataFields.categoryY = "state";
+series.columns.template.tooltipText = "{categoryY}: [bold]{valueX}[/]";
+series.columns.template.strokeWidth = 0;
+series.columns.template.adapter.add("fill", function(fill, target) {
+  if (target.dataItem) {
+    switch(target.dataItem.dataContext.region) {
+      case "Central":
+        return chart2.colors.getIndex(0);
+        break;
+      case "East":
+        return chart2.colors.getIndex(1);
+        break;
+      case "South":
+        return chart2.colors.getIndex(2);
+        break;
+      case "West":
+        return chart2.colors.getIndex(3);
+        break;
+    }
+  }
+  return fill;
+});
+
+// Add ranges
+function addRange(label, start, end, color) {
+  var range = yAxis.axisRanges.create();
+  range.category = start;
+  range.endCategory = end;
+  range.label.text = label;
+  range.label.disabled = false;
+  range.label.fill = color;
+  range.label.location = 0;
+  range.label.dx = -130;
+  range.label.dy = 12;
+  range.label.fontWeight = "bold";
+  range.label.fontSize = 12;
+  range.label.horizontalCenter = "left"
+  range.label.inside = true;
+
+  range.grid.stroke = am4core.color("#396478");
+  range.grid.strokeOpacity = 1;
+  range.tick.length = 200;
+  range.tick.disabled = false;
+  range.tick.strokeOpacity = 0.6;
+  range.tick.stroke = am4core.color("#396478");
+  range.tick.location = 0;
+
+  range.locations.category = 1;
+}
+
+
+chart2.cursor = new am4charts.XYCursor();
+
+}); // end am4core.ready()
+</script>
+
+{% endblock %}

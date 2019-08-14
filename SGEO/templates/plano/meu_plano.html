@@ -1,0 +1,67 @@
+{%extends 'base/base.html'%}
+
+{%block title%}{{title_complete|title}}{%endblock%}
+{%block content%}
+<section class="content">
+  <div class="container-fluid lista">
+
+    {% include 'base/msg_sucesso.html' %}
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lista-content">
+      <div class="card">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="header">
+            <h2>
+              {{title_complete}}
+            </h2>
+              <div class="header-btn">
+                <button class="btn btn-red btn-remove"><i class="material-icons">&#xE872;</i></button>
+              </div>
+          </div>
+
+          <div class="body">
+
+              <h3>Pagamentos</h3>
+
+           <div class="table-responsive">
+            <table id="lista-database" class="table table-bordered table-striped lista-table">
+              <thead>
+                <tr>
+                  <th>#ID</th>
+                  <th>Status</th>
+                  <th>Criado em:</th>
+                  <th>Pagamento</th>
+                  <th>Vencimento</th>
+                </tr>
+              </thead>
+
+              <tbody>
+               {% if all_pagamentos%}
+               {% for pagamento in all_pagamentos %}
+               <tr>
+                <td>{{pagamento.id}}</td>
+                <td><b>{{pagamento.get_status_display}}</b></td>
+                <td>{{pagamento.data_criacao|default_if_none:"2"}}</td>
+                <td>{{pagamento.format_pagamento|default_if_none:""}}</td>
+                <td>{{pagamento.vencimento|default_if_none:""}}</td>
+              </tr>
+              {% endfor %}
+              {%else%}
+              {%endif%}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+</div>
+</section>
+
+
+{%endblock%}

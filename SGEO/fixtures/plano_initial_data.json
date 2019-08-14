@@ -1,0 +1,186 @@
+[
+  {
+    "model": "plano.TipoPlano",
+    "pk": 1,
+    "fields": {
+      "nome": "Iniciante",
+      "codigo": "iniciante",
+      "valor_mensal": 99.00,
+      "valor_anual": 948.00
+    }
+  },
+    {
+    "model": "plano.TipoPlano",
+    "pk": 2,
+    "fields": {
+      "nome": "Controle",
+      "codigo": "controle",
+      "valor_mensal": 149.00,
+      "valor_anual": 1548.00
+    }
+  },
+    {
+    "model": "plano.TipoPlano",
+    "pk": 3,
+    "fields": {
+      "nome": "Profissional",
+      "codigo": "profissional",
+      "valor_mensal": 199.00,
+      "valor_anual": 2148.00
+    }
+  },
+    {
+    "model": "plano.TipoPlano",
+    "pk": 4,
+    "fields": {
+      "nome": "Corporativo",
+      "codigo": "corporativo",
+      "valor_mensal": 299.00,
+      "valor_anual": 3348.00
+    }
+  },
+  {
+    "model": "plano.NotasAdicionais",
+    "pk": 1,
+    "fields": {
+      "quantidade": 100,
+      "valor": 19.90
+    }
+  },
+  {
+    "model": "plano.NotasAdicionais",
+    "pk": 2,
+    "fields": {
+      "quantidade": 250,
+      "valor": 29.90
+    }
+  },
+  {
+    "model": "plano.NotasAdicionais",
+    "pk": 3,
+    "fields": {
+      "quantidade": 500,
+      "valor": 49.90
+    }
+  },
+  {
+    "model": "plano.NotasAdicionais",
+    "pk": 4,
+    "fields": {
+      "quantidade": 1000,
+      "valor": 89.90
+    }
+  },
+  {
+    "model": "plano.UsuariosAdicionais",
+    "pk": 1,
+    "fields": {
+      "quantidade": 1,
+      "valor": 9.90
+    }
+  },
+  {
+    "model": "plano.UsuariosAdicionais",
+    "pk": 2,
+    "fields": {
+      "quantidade": 2,
+      "valor": 19.80
+    }
+  },
+  {
+    "model": "plano.UsuariosAdicionais",
+    "pk": 3,
+    "fields": {
+      "quantidade": 3,
+      "valor": 29.70
+    }
+  },
+  {
+    "model": "plano.UsuariosAdicionais",
+    "pk": 4,
+    "fields": {
+      "quantidade": 4,
+      "valor": 39.60
+    }
+  },
+  {
+    "model": "plano.UsuariosAdicionais",
+    "pk": 5,
+    "fields": {
+      "quantidade": 5,
+      "valor": 49.50
+    }
+  },
+  {
+    "model": "plano.UsuariosAdicionais",
+    "pk": 6,
+    "fields": {
+      "quantidade": 6,
+      "valor": 59.40
+    }
+  },
+  {
+    "model": "plano.UsuariosAdicionais",
+    "pk": 7,
+    "fields": {
+      "quantidade": 7,
+      "valor": 69.30
+    }
+  },
+  {
+    "model": "plano.UsuariosAdicionais",
+    "pk": 8,
+    "fields": {
+      "quantidade": 8,
+      "valor": 79.20
+    }
+  },
+  {
+    "model": "plano.UsuariosAdicionais",
+    "pk": 9,
+    "fields": {
+      "quantidade": 9,
+      "valor": 89.10
+    }
+  },
+  {
+    "model": "plano.UsuariosAdicionais",
+    "pk": 10,
+    "fields": {
+      "quantidade": 10,
+      "valor": 99.00
+    }
+  },
+  {
+    "model": "plano.UsuariosAdicionais",
+    "pk": 11,
+    "fields": {
+      "quantidade": 15,
+      "valor": 148.50
+    }
+  },
+  {
+    "model": "plano.BoletosAdicionais",
+    "pk": 1,
+    "fields": {
+      "quantidade": 100,
+      "valor": 19.90
+    }
+  },
+  {
+    "model": "plano.BoletosAdicionais",
+    "pk": 2,
+    "fields": {
+      "quantidade": 200,
+      "valor": 39.90
+    }
+  },
+  {
+    "model": "plano.BoletosAdicionais",
+    "pk": 1,
+    "fields": {
+      "quantidade": 400,
+      "valor": 79.90
+    }
+  }
+]

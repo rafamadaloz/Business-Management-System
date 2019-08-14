@@ -1,0 +1,160 @@
+{%extends 'base/base.html'%}
+
+{%block title%}{%endblock%}
+{%block content%}
+<section class="content" id="hotmart">
+    <div class="container-fluid">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
+                <div class="card">
+
+                    <!--Header-->
+                    <div class="header">
+
+                        <h2>
+                            {{title_complete}}
+                        </h2>
+
+                            <a class="btn-get-started btn-conectar" href="https://api-sec-vlc.hotmart.com/security/oauth/authorize?response_type=code&client_id=[ 43c42e35-0590-4f2d-aa7d-16043ade0b44 ]&redirect_uri=[http://127.0.0.1:8000/integracao_financeira/hotmart/dashboard/]">Conectar</a>
+
+                    </div>
+
+                    <div class="body">
+
+                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+                             style="padding-right: 0px; padding-left: 0px">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                <!-- START WIDGET SLIDER -->
+                                <div class="widget widget-default widget-carousel widget1">
+                                    <div>
+                                        <div class="widget-title">Valor de vendas</div>
+                                        <div class="widget-subtitle"></div>
+                                        <div class="widget-int">R$ 8.903,60</div>
+                                        <div class="widget-subtitle widget-buttons">35% de aumento com mês anterior
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END WIDGET SLIDER -->
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                <!-- START WIDGET MESSAGES -->
+                                <div class="widget widget-default widget-carousel widget2">
+                                    <div>
+                                        <div class="widget-title">Quantidade de vendas</div>
+                                        <div class="widget-subtitle"></div>
+                                        <div class="widget-int">92</div>
+                                        <div class="widget-subtitle widget-buttons">10% de aumento com mês anterior
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END WIDGET MESSAGES -->
+
+                            </div>
+
+                        </div>
+
+                         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <div class="widget-graph widget--2x1">
+                                <div id="chartdiv-hotmart"></div>
+                            </div>
+                        </div>
+
+                        <div id="graficos" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding-left: 0px">
+                                <div class='widget-graph widget--3x1'>
+                                    <!--<header class='widget-header'>
+                                        <div class='widget-header-indicator'></div>
+                                    </header> -->
+                                    <div class='widget-content'>
+                                        <canvas id="line-chart-Hotmart"></canvas>
+                                    </div>
+                                    <!--<footer class='widget-footer'>
+                                        <a class='fa fa-trash-o'></a>
+                                        <a class='fa fa-cog'></a>
+                                    </footer>-->
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding-right: 0px">
+                                <div class='widget-graph widget--3x1'>
+                                    <!--<header class='widget-header'>
+                                        <div class='widget-header-indicator'></div>
+                                    </header> -->
+                                    <div class='widget-content'>
+                                        <canvas id="line-chart-Hotmart-quantidade"></canvas>
+                                    </div>
+                                    <!--<footer class='widget-footer'>
+                                        <a class='fa fa-trash-o'></a>
+                                        <a class='fa fa-cog'></a>
+                                    </footer>-->
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        {% include 'base/search.html' %}
+
+                        <div class="table-responsive">
+                            <table id="lista-database" class="table table-bordered table-striped lista-table">
+                                <thead>
+                                <tr>
+                                    <th>#ID</th>
+                                    <th>Descrição</th>
+                                    <th>Data do Pagamento</th>
+                                    <th>Grupo</th>
+                                    <th>Cliente</th>
+                                    <th>Valor Total</th>
+                                    <th>Remover</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for entrada in entradas %}
+                                {% if entrada.grupo_plano.id == 1 %}
+                                <tr class="clickable-row"
+                                    data-href="{% url 'financeiro:editarrecebimentoview' entrada.id %}">
+                                    <td>{{entrada.id}}</td>
+                                    <td>{{entrada.descricao}}</td>
+                                    <td>{{entrada.format_data_pagamento|default_if_none:""}}</td>
+                                    <td>{{entrada.grupo_plano}}</td>
+                                    <td>{{entrada.cliente|default_if_none:""}}</td>
+                                    <td>{{entrada.valor_total}}</td>
+                                    <td class="lista-remove">
+                                        <input type="checkbox" name="{{entrada.id}}"
+                                               id="remover-entrada-{{entrada.id}}"/>
+                                        <label class="remove-entry-label" for="remover-entrada-{{entrada.id}}"></label>
+                                    </td>
+                                </tr>
+                                {%endif%}
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+
+{%endblock%}
+
+{% block js %}
+
+<script type="text/javascript">
+    $.Admin.graficosHotmart.init();
+</script>
+
+{% endblock %}

@@ -1,0 +1,295 @@
+<!-- Body-->
+<div class="body">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#tab_informacoes" data-toggle="tab">INFORMAÇÕES</a></li>
+            <li role="presentation"><a href="#tab_datas" data-toggle="tab">DATAS</a></li>
+            <li role="presentation"><a href="#tab_pagamento" data-toggle="tab">PAGAMENTO</a></li>
+            <li role="presentation"><a href="#tab_vendedor" data-toggle="tab">VENDEDOR</a></li>
+        </ul>
+
+        <div class="tab-content">
+
+            <!-- Tab INFORMAÇÕES -->
+            <div role="tabpanel" class="tab-pane active" id="tab_informacoes">
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>{{form.empresa.label}}</label><strong style="color:red;"> *</strong>
+                        {% if form.empresa.errors %}<label class="error">{% for error in form.empresa.errors %}{{error}}{% endfor %}</label>{% endif %}
+                        <div class="input-group" style="margin-bottom: 0px;">
+                            <div class="form-line">
+                                {{form.empresa}}
+                            </div>
+                            <a class="input-group-addon newwindow" style="color: green;" title="Adicionar empresa" href="{% url 'cadastro:addempresaview' %}"><i class="material-icons add-new-icon" title="Adicionar empresa">&#xE147;</i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>{{form.cliente.label}}</label><strong style="color:red;"> *</strong>
+                        {% if form.cliente.errors %}<label class="error">{% for error in form.cliente.errors %}{{error}}{% endfor %}</label>{% endif %}
+                        <div class="input-group" style="margin-bottom: 0px;">
+                            <div class="form-line">
+                                {{form.cliente}}
+                            </div>
+                            <a class="input-group-addon newwindow" style="color: green;" title="Adicionar cliente" href="{% url 'cadastro:addclienteview' %}"><i class="material-icons add-new-icon" title="Adicionar cliente">&#xE147;</i></a>
+                        </div>
+                    </div>
+                </div>
+
+<!--                <div class="col-sm-6">-->
+<!--                    <div class="form-group">-->
+<!--                        <label>{{form.tipo_contrato.label}}</label><strong style="color:red;"> *</strong>-->
+<!--                        {% if form.tipo_contrato.errors %}<label class="error">{% for error in form.tipo_contrato.errors %}{{error}}{% endfor %}</label>{% endif %}-->
+<!--                        <div class="input-group" style="margin-bottom: 0px;">-->
+<!--                            <div class="form-line">-->
+<!--                                {{form.tipo_contrato}}-->
+<!--                            </div>-->
+<!--                            <a class="input-group-addon newwindow" style="color: green;" title="Adicionar tipo de contrato" href="{% url 'contratos:addtipocontratoview' %}"><i class="material-icons add-new-icon" title="Adicionar tipo de contrato">&#xE147;</i></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>{{form.condicao_pagamento.label}}</label><strong style="color:red;"> *</strong>
+                        {% if form.condicao_pagamento.errors %}<label class="error">{% for error in form.condicao_pagamento.errors %}{{error}}{% endfor %}</label>{% endif %}
+                        <div class="input-group" style="margin-bottom: 0px;">
+                            <div class="form-line">
+                                {{form.condicao_pagamento}}
+                            </div>
+                            <a class="input-group-addon newwindow" style="color: green;" title="Adicionar condicao de pagamento" href="{% url 'vendas:addcondicaopagamentoview' %}"><i class="material-icons add-new-icon" title="Adicionar condição de pagamento">&#xE147;</i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.centro_custos.label}}</label>
+                            {% if form.centro_custos.errors %}<label class="error">{% for error in form.centro_custos.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.centro_custos}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.situacao.label}}</label>
+                            {% if form.situacao.errors %}<label class="error">{% for error in form.situacao.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.situacao}}
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- #Tab INFORMAÇÕES -->
+
+            <div role="tabpanel" class="tab-pane" id="tab_datas">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.dia_vencimento.label}}</label>{% if form.dia_vencimento.required %}<strong style="color:red;"> *</strong>{% endif %}
+                            {% if form.dia_vencimento.errors %}<label class="error">{% for error in form.dia_vencimento.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.dia_vencimento}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.duracao_contrato.label}}</label>{% if form.duracao_contrato.required %}<strong style="color:red;"> *</strong>{% endif %}
+                            {% if form.duracao_contrato.errors %}<label class="error">{% for error in form.duracao_contrato.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.duracao_contrato}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.tipo_duracao_contrato.label}}</label>
+                            {% if form.tipo_duracao_contrato.errors %}<label class="error">{% for error in form.tipo_duracao_contrato.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.tipo_duracao_contrato}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.ultimo_reajuste.label}}</label>
+                            {% if form.ultimo_reajuste.errors %}<label class="error">{% for error in form.ultimo_reajuste.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.ultimo_reajuste}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.proximo_reajuste.label}}</label>
+                            {% if form.proximo_reajuste.errors %}<label class="error">{% for error in form.proximo_reajuste.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.proximo_reajuste}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.data_termino.label}}</label>
+                            {% if form.data_termino.errors %}<label class="error">{% for error in form.data_termino.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.data_termino}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.dias_carencia.label}}</label>{% if form.dias_carencia.required %}<strong style="color:red;"> *</strong>{% endif %}
+                            {% if form.dias_carencia.errors %}<label class="error">{% for error in form.dias_carencia.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.dias_carencia}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="tab_pagamento">
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label {% for error in form.valor_periodo.errors %}title="{{error}}"{% endfor %}>{{form.valor_periodo.label}}</label>
+                            {% if form.valor_periodo.errors %}<label class="error"></label>{% endif %}
+                            {{form.valor_periodo}}
+                        </div>
+                    </div>
+                </div>
+
+
+                 {% for field in form %}
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <div class="form-line">
+                      <label>{{field.label}}</label>{% if field.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+                      {% if field.errors %}<label class="error">{% for error in field.errors %}{{error}}{% endfor %}</label>{% endif %}
+                      {{field}}
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label {% for error in form.valor_total.errors %}title="{{error}}"{% endfor %}>{{form.valor_total.label}}</label>
+                            {% if form.valor_total.errors %}<label class="error"></label>{% endif %}
+                            {{form.valor_total}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.numero_parcelas.label}}</label>{% if form.numero_parcelas.required %}<strong style="color:red;"> *</strong>{% endif %}
+                            {% if form.numero_parcelas.errors %}<label class="error">{% for error in form.numero_parcelas.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.numero_parcelas}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.intervalo.label}}</label>
+                            {% if form.intervalo.errors %}<label class="error">{% for error in form.intervalo.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.intervalo}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.periodo.label}}</label>
+                            {% if form.periodo.errors %}<label class="error">{% for error in form.periodo.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.periodo}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.intervalo_dias.label}}</label>{% if form.intervalo_dias.required %}<strong style="color:red;"> *</strong>{% endif %}
+                            {% if form.intervalo_dias.errors %}<label class="error">{% for error in form.intervalo_dias.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.intervalo_dias}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label {% for error in form.valor_entrada.errors %}title="{{error}}"{% endfor %}>{{form.valor_entrada.label}}</label>
+                            {% if form.valor_entrada.errors %}<label class="error"></label>{% endif %}
+                            {{form.valor_entrada}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab_vendedor">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>{{form.vendedor.label}}</label>
+                            {% if form.vendedor.errors %}<label class="error">{% for error in form.vendedor.errors %}{{error}}{% endfor %}</label>{% endif %}
+                            {{form.vendedor}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label {% for error in form.comissao_vendedor.errors %}title="{{error}}"{% endfor %}>{{form.comissao_vendedor.label}}</label>
+                            {% if form.comissao_vendedor.errors %}<label class="error"></label>{% endif %}
+                            {{form.comissao_vendedor}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label {% for error in form.valor_comissao_vendedor_periodo.errors %}title="{{error}}"{% endfor %}>{{form.valor_comissao_vendedor_periodo.label}}</label>
+                            {% if form.valor_comissao_vendedor_periodo.errors %}<label class="error"></label>{% endif %}
+                            {{form.valor_comissao_vendedor_periodo}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label {% for error in form.valor_comissao_vendedor_total.errors %}title="{{error}}"{% endfor %}>{{form.valor_comissao_vendedor_total.label}}</label>
+                            {% if form.valor_comissao_vendedor_total.errors %}<label class="error"></label>{% endif %}
+                            {{form.valor_comissao_vendedor_total}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% if object.status == '0' or not object%}
+    <button class="btn btn-success foot-btn" type="submit"><i class="material-icons">&#xE148;</i><span> SALVAR</span></button>
+    {% endif %}
+</div>
+<!--#Body-->

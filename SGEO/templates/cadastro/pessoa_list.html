@@ -1,0 +1,79 @@
+{%extends 'base/base.html'%}
+
+{%block title%}{{title_complete|title}}{%endblock%}
+{%block content%}
+<section class="content">
+  <div class="container-fluid lista">
+  
+    {% include 'base/title_header.html' %}
+    
+    {% include 'base/msg_sucesso.html' %}
+      {% include 'base/msg_error.html' %}
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lista-content">
+      <div class="card">
+
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="header">
+            <h2>
+              {{title_complete}}
+            </h2>
+              <div class="header-btn">
+                {% if tipo_pessoa == 'cliente' %}
+                <a id="importar_cliente" href="javascript:void(0);" class="btn btn-primary"><i class="material-icons">&#xE884;</i><span>IMPORTAR CLIENTE</span></a>
+                {% endif %}
+                <a href="{{add_url}}" class="btn btn-success botao_adicionar"><i class="material-icons">&#xE148;</i><span> ADICIONAR</span></a>
+                <button class="btn btn-red btn-remove"><i class="material-icons">&#xE872;</i></button>
+              </div>
+          </div>
+
+          <div class="body">
+
+           {% include 'base/search.html' %}
+
+           {% if tipo_pessoa == 'cliente' %}
+           {% include 'cadastro/cliente/cliente_list_table.html' %}
+           {% elif tipo_pessoa == 'empresa' %}
+           {% include 'cadastro/empresa/empresa_list_table.html' %}
+           {% elif tipo_pessoa == 'fornecedor' %}
+           {% include 'cadastro/fornecedor/fornecedor_list_table.html' %}
+           {% elif tipo_pessoa == 'transportadora' %}
+           {% include 'cadastro/transportadora/transportadora_list_table.html' %}
+           {% elif tipo_pessoa == 'vendedor' %}
+           {% include 'cadastro/vendedor/vendedor_list_table.html' %}
+           {% else %}
+           Nenhum registro encontrado
+           {% endif %}
+
+        </div>
+
+      </form>
+
+       {% include 'cadastro/cliente/modal_importar_cliente.html' %}
+
+    </div>
+  </div>
+
+</div>
+</section>
+
+{%endblock%}
+
+{% block js %}
+  {% include 'base/load_jqueryui.html' %}
+
+  {% include 'base/tooltip_js.html' %}
+
+   <script type="text/javascript">
+    $('body').on('click', '#importar_cliente', function(){
+      $('.importar_cliente_modal').modal('show');
+    });
+
+    $('form[id=form_importar_cliente]').on('submit', function(){
+        $('.page-loader-wrapper').show();
+        $('.loader-message').text('Importando clientes, aguarde...');
+    });
+  </script>
+
+{% endblock %}

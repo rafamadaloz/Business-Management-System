@@ -1,0 +1,83 @@
+{%extends 'base/base.html'%}
+
+{%block title%}{{title_complete|title}}{%endblock%}
+{%block content%}
+<section class="content">
+  <div class="container-fluid lista">
+
+    {% include 'base/title_header.html' %}
+
+    {% include 'base/msg_sucesso.html' %}
+    {% include 'base/msg_error.html' %}
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lista-content">
+      <div class="card">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="header">
+            <h2>
+              TODOS OS BOLETOS
+            </h2>
+            <div class="header-btn">
+              <a href="{% url 'boletos:adicionarboletoavulsoview'%}" class="btn btn-success"><i class="material-icons">&#xE148;</i><span> NOVO BOLETO AVULSO</span></a>
+              <button class="btn btn-red btn-remove"><i class="material-icons">&#xE872;</i></button>
+            </div>
+          </div>
+
+          <div class="body">
+
+           {% include 'base/search.html' %}
+
+           <div class="table-responsive">
+            <table id="lista-database" class="table table-bordered table-striped lista-table">
+              <thead>
+                <tr>
+                  <th>#ID</th>
+                  <th>Emissão</th>
+                  <th>Número</th>
+                  <th>Pagador</th>
+                  <th>Vencimento</th>
+                  <th>Valor</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody>
+               {% if all_boletos%}
+               {% for boleto in all_boletos %}
+               <tr class="clickable-row" data-href="{% url 'boletos:editarboletoavulsoview' boleto.id %}">
+                <td>{{boleto.id}}</td>
+                <td>{{boleto.emissao}}</td>
+                <td>{{boleto.numero}}</td>
+                <td>{{boleto.pagador}}</td>
+                <td>{{boleto.vencimento}}</td>
+                <td>{{boleto.valor}}</td>
+                <td>{{boleto.get_status_display}}</td>
+
+              </tr>
+              {% endfor %}
+              {%else%}
+              {%endif%}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+</div>
+</section>
+
+
+{%endblock%}
+
+{% block js %}
+  {% include 'base/load_jqueryui.html' %}
+
+  {% include 'base/tooltip_js.html' %}
+
+{% endblock %}

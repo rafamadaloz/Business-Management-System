@@ -1,0 +1,78 @@
+{%extends 'base/base.html'%}
+
+{%block title%}{{title_complete|title}}{%endblock%}
+{%block content%}
+<section class="content">
+    <div class="container-fluid lista">
+
+        {% include 'base/title_header.html' %}
+
+        {% include 'base/msg_sucesso.html' %}
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lista-content">
+            <div class="card">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="header">
+                        <h2>
+                            {{title_complete}}
+                        </h2>
+                        <div class="header-btn">
+                            <a href="{{add_url}}" class="btn btn-success"><i class="material-icons">&#xE148;</i><span> ADICIONAR</span></a>
+                            <button class="btn btn-red btn-remove"><i class="material-icons">&#xE872;</i></button>
+                        </div>
+                    </div>
+
+                    <div class="body">
+
+                        {% include 'base/search.html' %}
+
+                        <div class="table-responsive">
+                            <table id="lista-database" class="table table-bordered table-striped lista-table">
+                                <thead>
+                                <tr>
+                                    <th>#ID</th>
+                                    <th>Situação</th>
+                                    <th>Cliente</th>
+                                    <th>Categoria</th>
+                                    <th>Data de abertura</th>
+                                    <th>Valor do negócio</th>
+                                    <th>Remover</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% if all_oportunidades%}
+                                {% for oportunidade in all_oportunidades %}
+                                <tr class="clickable-row" data-href="{% url 'crm2:editaroportunidadeview' oportunidade.id %}">
+                                    <td>{{oportunidade.id}}</td>
+                                    <td>{{oportunidade.get_situacao_display}}</td>
+                                    <td>{{oportunidade.cliente}}</td>
+                                    <td>{{oportunidade.get_categoria_display|default_if_none:""}}</td>
+                                    <td>{{oportunidade.data_abertura|default_if_none:""}}</td>
+                                    <td>{{oportunidade.valor|default_if_none:""}}</td>
+                                    <td class="lista-remove">
+                                        <input type="checkbox" name="{{oportunidade.id}}" id="remover-entrada-{{oportunidade.id}}"/>
+                                        <label class="remove-entry-label" for="remover-entrada-{{oportunidade.id}}"></label>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                {%else%}
+                                {%endif%}
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+{%endblock%}

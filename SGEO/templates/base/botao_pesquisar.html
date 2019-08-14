@@ -1,0 +1,293 @@
+<div class="pesquisas" id="pesquisas">
+    <div class="opcao">
+        <a href="{% url 'agenda:agendaview' %}">Agenda</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:listaclientesview' %}">Lista de clientes</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:addclienteview' %}">Cadastrar novo cliente</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:listafornecedoresview' %}">Lista de fornecedores</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:listafornecedoresview' %}">Cadastrar novo fornecedor</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:listaprodutosview' %}">Lista de produtos</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:addprodutoview' %}">Cadastrar novo produto</a>
+    </div>
+    <div class="opcao">
+        <a>Produtos com estoque baixo</a>
+    </div>
+    <div class="opcao">
+        <a>Produtos vencidos</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:listaservicosview' %}">Lista de serviços</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:addservicoview' %}">Cadastrar novo serviço</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:listaempresasview' %}">Lista de empresas</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:addempresaview' %}">Cadastrar nova empresa</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:listatransportadorasview' %}">Lista de transportadoras</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:addtransportadoraview' %}">Lista de transportadoras</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:listavendedorview' %}">Lista de vendedores</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:addvendedorview' %}">Cadastrar novo vendedor</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:listacategoriasview' %}">Lista de categorias</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:addcategoriaview' %}">Cadastrar nova categoria</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:listaunidadesview' %}">Lista de unidades de medida</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:addunidadeview' %}">Cadastrar nova unidade de medida</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:listamarcasview' %}">Lista de marcas</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:addmarcaview' %}">Cadastrar nova marca</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:listagrupoview' %}">Lista de grupos</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'cadastro:addgrupoview' %}">Cadastrar novo grupo</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'compras:listaorcamentocompraview' %}">Consultar orçamentos de compra</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'compras:addorcamentocompraview' %}">Cadastrar novo orçamento de compra</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'vendas:listapedidovendaview' %}">Lista de pedidos de venda</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'vendas:addpedidovendaview' %}">Novo pedido de venda</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'vendas:listacondicaopagamentoview' %}">Lista de condições de pagamento</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'vendas:addcondicaopagamentoview' %}">Cadastrar nova condição de pagamento</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'contratos:listacontratosview' %}">Lista de contratos</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'contratos:addcontratoview' %}">Cadastrar novo contrato</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'contratos:listatiposcontratosview' %}">Lista de tipos de contratos</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'contratos:addtipocontratoview' %}">Cadastrar novo tipo de contrato</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'crm2:listaoportunidadeview' %}">Lista de oportunidades (CRM)</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'crm2:addoportunidadeview' %}">Cadastrar nova oportunidade (CRM)</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'crm2:navegacaoview' %}">Navegação (CRM)</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'crm2:funilview' %}">Funil (CRM)</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'estoque:consultaestoqueview' %}">Consultar estoque</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'estoque:listalocalview' %}">Locais de estoque</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'estoque:addlocalview' %}">Cadastrar novo local de estoque</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'estoque:listamovimentoestoqueview' %}">Todas as movimentações de estoque</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'estoque:listaentradasestoqueview' %}">Entradas de estoque</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'estoque:listasaidasestoqueview' %}">Saídas de estoque</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'estoque:listatransferenciasestoqueview' %}">Transferências de estoque</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:planocontasview' %}">Consultar planos de contas</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:addcentrocustoview' %}">Cadastrar novo centro de custo</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:centrocustosview' %}">Consultar centros de custo</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:fluxodecaixaview' %}">Fluxo de caixa</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:listalancamentoview' %}">Consultar lançamentos</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:listacontapagarview' %}">Consultar lançamentos a pagar</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:listapagamentosview' %}">Consultar lançamentos pagos</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:listacontareceberview' %}">Consultar lançamentos a receber</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:listarecebimentosview' %}">Consultar lançamentos recebidos</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:addcontapagarview' %}">Novo lançamento de conta a pagar</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:addpagamentoview' %}">Novo lançamento de conta paga</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:listacontareceberview' %}">Novo lançamento de conta a receber</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'financeiro:listarecebimentosview' %}">Novo lançamento de conta recebida</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:addnotafiscalsaidaview' %}">Cadastrar nova nota fiscal</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:listanotafiscalsaidaview' %}">Consultar notas fiscais</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:listanotafiscalentradaview' %}">Consultar notas fiscais de fornecedores</a>
+    </div>
+    <div class="opcao">
+        <a>Cadastrar nova nota fiscal de fornecedores</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:configuracaonotafiscal' %}">Configurações de nota fiscal</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:listanaturezaoperacaoview' %}">Consultar naturezas da operação cadastradas (NF-e)</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:addnaturezaoperacaoview' %}">Cadastrar nova natureza de operação (NF-e)</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:listagrupofiscalview' %}">Consultar grupos fiscais</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:addgrupofiscalview' %}">Cadastrar novo grupo fiscal</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:consultarcadastro' %}">Consultar cadastro (SEFAZ)</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:inutilizarnotas' %}">Inutilizar notas</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:consultarnota' %}">Consultar nota (SEFAZ)</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:baixarnota' %}">Baixar nota (SEFAZ)</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'fiscal:manifestacaodestinatario' %}">Manifestação do destinatário (SEFAZ)</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'integracao_financeira:eduzzview' %}">Integração EDUZZ</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'integracao_financeira:hotmartview' %}">Integração Hotmart</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'integracao_financeira:mercadopagoview' %}">Integração MercadoPago</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'integracao_financeira:pagseguroview' %}">Integração PagSeguro</a>
+    </div>
+    <div class="opcao">
+        <a>Integração CIELO</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'vendas:addorcamentovendaview' %}">Cadastrar novo orçamento de venda</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'vendas:addpedidovendaview' %}">Cadastrar novo pedido de venda</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'vendas:listapedidovendaview' %}">Consultar pedidos de venda</a>
+    </div>
+    <div class="opcao">
+        <a href="{% url 'vendas:listaorcamentovendaview' %}">Consultar orçamentos de venda</a>
+    </div>
+</div>
+
+{% block js %}
+
+<script>
+
+    $(document).ready(function () {
+        $(document).ready(function () {
+            var valor = $('#textFind');
+            valor.on('input', function () {
+                if (valor.val().length >= 2) $('.pesquisas').show(200);
+                else $('.pesquisas').hide(200);
+            })
+        });
+
+        $('#pesquisas').focusout(function () {
+            $('.pesquisas').hide(200);
+        })
+    });
+
+    $(document).mouseup(function (e) {
+        var container = $(".pesquisas");
+
+        // if the target of the click isn't the container nor a descendant of the container
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            container.hide(200);
+        }
+    });
+
+
+    $(function () {
+        $.expr[":"].contains = $.expr.createPseudo(function (a) {
+            return function (e) {
+                return ~$(e).text().toUpperCase().indexOf(a.toUpperCase());
+            }
+        });
+        $("[name=q]").on("input", function () {
+            $(".opcao").hide();
+            $(".opcao:contains('" + this.value + "')").show();
+        });
+    });
+
+
+</script>
+
+{% endblock %}

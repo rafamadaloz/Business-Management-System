@@ -1,0 +1,33 @@
+<div class="table-responsive">
+    <table id="lista-database" class="table table-bordered table-striped lista-table">
+        <thead>
+        <tr>
+            <th>#ID</th>
+            <th>Nome/Razão Social</th>
+            <th>CPF/CNPJ</th>
+            <th>Estado</th>
+            <th>Município</th>
+            <th>Remover</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% if all_vendedores%}
+        {% for vendedor in all_vendedores %}
+        <tr class="clickable-row" data-href="{% url 'cadastro:editarvendedorview' vendedor.id %}">
+            <td>{{vendedor.id}}</td>
+            <td>{{vendedor.nome_razao_social}}</td>
+            <td>{% ifequal vendedor.tipo_pessoa "PJ" %}{{vendedor.pessoa_jur_info.cnpj|default_if_none:""}}{% else %}{{vendedor.pessoa_fis_info.cpf|default_if_none:""}}{% endifequal %}</td>
+            <td>{% if vendedor.endereco.all.0.uf %}{{vendedor.endereco.all.0.get_uf_display}}{% endif %}</td>
+            <td>{{vendedor.endereco.all.0.municipio|default_if_none:""}}</td>
+            <td class="lista-remove">
+                <input type="checkbox" name="{{vendedor.id}}" id="remover-entrada-{{vendedor.id}}"/>
+                <label class="remove-entry-label" for="remover-entrada-{{vendedor.id}}"></label>
+            </td>
+        </tr>
+        {% endfor %}
+        {%else%}
+        {%endif%}
+        </tbody>
+    </table>
+</div>

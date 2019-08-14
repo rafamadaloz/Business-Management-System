@@ -1,0 +1,30 @@
+<h4 style="border-bottom: 1px solid #afabab;">Pedidos/Orçamentos de venda realizados por <b>{{object.vendedor}}</b></h4>
+{% include 'base/search.html' %}
+
+<div class="table-responsive lista-content">
+    <table id="lista-database" class="table table-bordered table-striped lista-table">
+        <thead>
+        <tr>
+            <th>#ID</th>
+            <th>Tipo</th>
+            <th>Cliente</th>
+            <th>Status</th>
+            <th>Data de vencimento</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for venda in object.venda_vendedor.all %}
+        <tr class="clickable-row" data-href="{{venda.get_child.edit_url}}">
+            <td>{{venda.id}}</td>
+            <td><b>{{venda.get_child.tipo_venda}}</b></td>
+            <td>{{venda.get_child.cliente}}</td>
+            <td><b>{{venda.get_child.get_status_display}}</b></td>
+            <td>{% if  venda.data_vencimento %}{{venda.format_data_vencimento}}{% endif %}</td>
+            <td>{{venda.format_valor_total}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

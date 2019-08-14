@@ -1,0 +1,29 @@
+<div class="col-sm-6">
+  <div class="form-group">
+    <div class="form-line">
+      <label>{{form.nbs.label}}</label>
+      {% if form.nbs.errors %}<label class="error">{% for error in form.nbs.errors %}{{error}}{% endfor %}</label>{% endif %}
+      {{form.nbs}}
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <div class="form-line">
+      <label>{{form.codigo_tributacao_municipal.label}}</label>
+      {% if form.codigo_tributacao_municipal.errors %}<label class="error">{% for error in form.codigo_tributacao_municipal.errors %}{{error}}{% endfor %}</label>{% endif %}
+      {{form.codigo_tributacao_municipal}}
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <div class="form-line">
+      <label>{{form.codigo_municipal_servico.label}}</label>
+      {% if form.codigo_municipal_servico.errors %}<label class="error">{% for error in form.codigo_municipal_servico.errors %}{{error}}{% endfor %}</label>{% endif %}
+      {{form.codigo_municipal_servico}}
+    </div>
+  </div>
+</div>

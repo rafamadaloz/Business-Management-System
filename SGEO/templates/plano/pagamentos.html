@@ -1,0 +1,75 @@
+{%extends 'base/base.html'%}
+
+{%block title%}Pagamentos{%endblock%}
+{%block content%}
+<section class="content">
+  <div class="container-fluid lista">
+
+    {% include 'base/title_header.html' %}
+
+    {% include 'base/msg_sucesso.html' %}
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lista-content">
+      <div class="card">
+        <form action="" method="post">
+        {% csrf_token %}
+        <div class="header">
+          <h2>
+            PAGAMENTOS
+          </h2>
+        </div>
+
+        <div class="body">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+              <div role="tabpanel" class="tab-pane active" id="tab_entradas">
+
+                <table class="table table-bordered lista-table">
+                  <thead>
+                    <tr>
+                      <th>Data</th>
+                      <th>Plano</th>
+                      <th>Adicionais</th>
+                        <th>Total</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                  {% if all_pagamentos %}
+                  {% for pag in all_pagamentos %}
+                  <tr class="clickable-row plano-grupo-row" data-href="{% url 'financeiro:editargrupoview' ge.id %}">
+                    <td class="prevent-click-row" data-toggle="collapse" data-target=".accordion-{{ge.id}}"><i style="vertical-align:inherit;" class="material-icons">&#xE5C5;</i>{{ge.codigo}}</td>
+                    <td>{{pag.proxima}}</td>
+
+                  </tr>
+                  {% endfor %}
+                  {%else%}
+                  {%endif%}
+                </tbody>
+              </table>
+
+              </div>
+              <!-- #Tab ENTRADAS -->
+            </div>
+          </div>
+
+
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+{%endblock%}
+
+{% block js %}
+
+  {% include 'base/load_jqueryui.html' %}
+
+  {% include 'base/tooltip_js.html' %}
+
+{% endblock %}

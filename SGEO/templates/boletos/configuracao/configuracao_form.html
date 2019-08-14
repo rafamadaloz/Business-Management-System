@@ -1,0 +1,179 @@
+<!-- Body-->
+<div class="body">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#tab_banco" data-toggle="tab">BANCO</a></li>
+      <li role="presentation"><a href="#tab_beneficiario" data-toggle="tab">BENEFICIÁRIO</a></li>
+    </ul>
+    <div class="tab-content">
+      <!-- Tab grupo -->
+      <div role="tabpanel" class="tab-pane active" id="tab_banco">
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.carteira.label}}</label>{% if form.carteira.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.carteira.errors %}<label class="error">{% for error in form.carteira.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.carteira}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-7">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.banco.label}}</label>{% if form.banco.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.banco.errors %}<label class="error">{% for error in form.banco.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.banco}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.agencia.label}}</label>{% if form.agencia.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.agencia.errors %}<label class="error">{% for error in form.agencia.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.agencia}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.conta.label}}</label>{% if form.conta.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.conta.errors %}<label class="error">{% for error in form.conta.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.conta}}
+            </div>
+          </div>
+        </div>
+
+         <div class="col-sm-1">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.digito.label}}</label>{% if form.digito.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.digito.errors %}<label class="error">{% for error in form.digito.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.digito}}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.instrucoes.label}}</label>{% if form.instrucoes.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.instrucoes.errors %}<label class="error">{% for error in form.instrucoes.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.instrucoes}}
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- #Tab grupo -->
+
+      <!-- Tab grupo -->
+        <div role="tabpanel" class="tab-pane formset-tab" id="tab_beneficiario">
+         <div class="col-sm-6">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.nome_razao_social.label}}</label>{% if form.nome_razao_social.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.nome_razao_social.errors %}<label class="error">{% for error in form.nome_razao_social.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.nome_razao_social}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.cpf_cnpj.label}}</label>{% if form.cpf_cnpj.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.cpf_cnpj.errors %}<label class="error">{% for error in form.cpf_cnpj.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.cpf_cnpj}}
+            </div>
+          </div>
+        </div>
+
+         <div class="col-sm-4">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.cep.label}}</label>{% if form.cep.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.cep.errors %}<label class="error">{% for error in form.cep.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.cep}}
+            </div>
+          </div>
+        </div>
+
+         <div class="col-sm-2">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.estado.label}}</label>{% if form.estado.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.estado.errors %}<label class="error">{% for error in form.estado.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.estado}}
+            </div>
+          </div>
+        </div>
+
+
+         <div class="col-sm-6">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.cidade.label}}</label>{% if form.cidade.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.cidade.errors %}<label class="error">{% for error in form.cidade.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.cidade}}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.bairro.label}}</label>{% if form.bairro.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.bairro.errors %}<label class="error">{% for error in form.bairro.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.bairro}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.logradouro.label}}</label>{% if form.logradouro.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.logradouro.errors %}<label class="error">{% for error in form.logradouro.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.logradouro}}
+            </div>
+          </div>
+        </div>
+
+         <div class="col-sm-2">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.numero.label}}</label>{% if form.numero.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.numero.errors %}<label class="error">{% for error in form.numero.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.numero}}
+            </div>
+          </div>
+        </div>
+
+         <div class="col-sm-4">
+          <div class="form-group">
+            <div class="form-line">
+              <label>{{form.complemento.label}}</label>{% if form.complemento.field.required %}<strong style="color:red;"> *</strong>{% endif %}
+              {% if form.complemento.errors %}<label class="error">{% for error in form.complemento.errors %}{{error}}{% endfor %}</label>{% endif %}
+              {{form.complemento}}
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+
+      </div>
+
+  </div>
+
+  <button class="btn btn-success foot-btn" type="submit"><i class="material-icons">&#xE148;</i><span> SALVAR</span></button>
+</div>
+<!--#Body-->

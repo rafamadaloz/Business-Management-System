@@ -1,0 +1,89 @@
+<div class="modal fade nova_oportunidade_modal">
+    <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">CADASTRO DE OPORTUNIDADE</h4>
+                </div>
+                <div class="modal-body" >
+                    <div class="container-fluid">
+
+                        <div class="row">
+
+                            <div role="tabpanel" class="tab-pane active" id="tab_dados_oportunidade">
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>{{form.cliente.label}}</label><strong style="color:red;"> *</strong>
+                                        {% if form.cliente.errors %}<label class="error">{% for error in form.cliente.errors %}{{error}}{% endfor %}</label>{% endif %}
+                                        <div class="input-group" style="margin-bottom: 0px;">
+                                            <div class="form-line">
+                                                {{form.cliente}}
+                                            </div>
+                                            <a class="input-group-addon newwindow" style="color: green;" title="Adicionar cliente" href="{% url 'cadastro:addclienteview' %}"><i class="material-icons add-new-icon" title="Adicionar cliente">&#xE147;</i></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>{{form.status_venda.label}}</label>
+                                        {% if form.status_venda.errors %}<label class="error">{% for error in form.status_venda.errors %}{{error}}{% endfor %}</label>{% endif %}
+                                        <div class="input-group" style="margin-bottom: 0px;">
+                                            <div class="form-line">
+                                                {{form.status_venda}}
+                                            </div>
+                                            <a class="input-group-addon newwindow" style="color: green;" title="Adicionar status de venda" href="{% url 'cadastro:addstatusvendaview' %}"><i class="material-icons add-new-icon" title="Adicionar status de venda">&#xE147;</i></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label {% for error in form.categoria.errors %}title="{{error}}"{% endfor %}>{{form.categoria.label}}</label>
+                                            {% if form.categoria.errors %}<label class="error"></label>{% endif %}
+                                            {{form.categoria}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label {% for error in form.situacao.errors %}title="{{error}}"{% endfor %}>{{form.situacao.label}}</label>
+                                            {% if form.situacao.errors %}<label class="error"></label>{% endif %}
+                                            {{form.situacao}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label {% for error in form.valor.errors %}title="{{error}}"{% endfor %}>{{form.valor.label}}</label>
+                                            {% if form.valor.errors %}<label class="error"></label>{% endif %}
+                                            {{form.valor}}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        <!-- #SELECIONAR ARQUIVO XML -->
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">FECHAR</button>
+                    <button class="btn btn-success foot-btn" type="submit"><i class="material-icons">&#xE148;</i><span> SALVAR</span></button>
+                </div>
+            </div>
+    </div>
+</div>
+<!-- #-->
+
+</div>

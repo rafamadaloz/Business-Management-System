@@ -1,0 +1,83 @@
+{%extends 'base/base.html'%}
+
+{%block title%}{{title_complete|title}}{%endblock%}
+{%block content%}
+
+<section id="form_compra_certificado" class="content">
+    <div class="col-sm-12">
+        <div class="form-group">
+            <div class="form-line">
+                <input id="1" class="form-control" type="checkbox" name="1">
+                <label class="" for="1" style="font-weight: bold;">Sou o sócio administrador da empresa</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="form-group">
+            <div class="form-line">
+                <input id="2" class="form-control" type="checkbox" name="2">
+                <label class="" for="2" style="font-weight: bold;">Possuo a documentação obrigatória para a validação
+                presencial conforme o <a>link</a> </label>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="form-group">
+            <div class="form-line">
+                <input id="3" class="form-control" type="checkbox" name="3">
+                <label class="" for="3" style="font-weight: bold;">Tenho disponibilidade para me deslocar até o
+                    <a>posto de atendimento da Certisign mais próximo</a> </label>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="form-group">
+            <div class="form-line">
+                <input id="4" class="form-control" type="checkbox" name="4">
+                <label class="" for="4" style="font-weight: bold;">Tenho ciência de que estou adquirindo um
+                certificado digital (e-CNPJ) modelo A1 válido por 1 ano.</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="form-group">
+            <div class="form-line">
+                <input id="5" class="form-control" type="checkbox" name="5">
+                <label class="" for="5" style="font-weight: bold;">Posso aguardar até três dias úteis após a
+                validação presencial para emitir o cartão.</label>
+            </div>
+        </div>
+    </div>
+
+    <button id="continuar" onclick="window.location.href='{% url 'compra_certificado:addsocioadmview' %}'" class="btn btn-success foot-btn" type="submit">CONTINUAR<i class="material-icons">navigate_next</i></button>
+
+</section>
+
+{%endblock%}
+
+{% block js %}
+
+<script>
+
+    /*
+    ck1 = $("#1").is(':checked');
+    ck2 = $("#2").is(':checked');
+    ck3 = $("#3").is(':checked');
+    ck4 = $("#4").is(':checked');
+    ck5 = $("#5").is(':checked');
+
+    if (ck1 && ck2 && ck3 && ck4 && ck5) {
+        $("#continuar").removeAttr('disabled')
+    } else {
+        $("#continuar").attr('disabled', 'disabled')
+    }
+    */
+
+    var checkBoxes = $('#form_compra_certificado .form-control');
+    checkBoxes.change(function () {
+        $('#continuar').prop('disabled', checkBoxes.filter(':checked').length < 5);
+    });
+    checkBoxes.change();
+</script>
+
+{% endblock %}

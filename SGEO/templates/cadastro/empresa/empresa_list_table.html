@@ -1,0 +1,111 @@
+
+<div class="table-responsive">
+  <table id="lista-database" class="table table-bordered table-striped lista-table">
+    <thead>
+      <tr>
+        <th>#ID</th>                   
+        <th>Padrão</th>
+        <th>Razão Social</th>
+        <th>CNPJ</th>
+        <th>Insc. Estadual</th>
+        <th>Responsável</th>
+        <th>Remover</th>
+      </tr>
+    </thead>
+
+    <tbody>
+     {% if all_empresas%}
+     {% for empresa in all_empresas %}
+     <tr class="clickable-row" data-href="{% url 'cadastro:editarempresaview' empresa.id %}">
+      <td>{{empresa.id}}</td>
+      <td>{% ifequal empresa.id user_empresa.id %}Sim{% endifequal %}</td>
+      <td>{{empresa.nome_razao_social}}</td>
+      <td>{{empresa.pessoa_jur_info.cnpj|default_if_none:""}}</td>
+      <td>{{empresa.pessoa_jur_info.inscricao_estadual|default_if_none:""}}</td>
+      <td>{{empresa.pessoa_jur_info.responsavel|default_if_none:""}}</td>
+      <td class="lista-remove">
+        <input type="checkbox" name="{{empresa.id}}" id="remover-entrada-{{empresa.id}}"/>
+        <label class="remove-entry-label" for="remover-entrada-{{empresa.id}}"></label>
+      </td>
+    </tr>
+    {% endfor %}
+    {%else%}
+    {%endif%}
+  </tbody>
+</table>
+</div>
+
+{% block js %}
+
+{% if not all_empresas%}
+
+<script>
+     $(document).ready(function () {
+        console.log("***** Demo template loaded!");
+
+        $(".ratings-axis-input input").rating();
+
+
+        //initialize instance
+        var enjoyhint_instance = new EnjoyHint({});
+
+//simple config.
+//Only one step - highlighting(with description) "New" button
+//hide EnjoyHint after a click on the button.
+        var enjoyhint_script_steps = [
+            {
+                'click .botao_adicionar': 'Clique em "Adicionar"'
+            },
+        ];
+
+//set script config
+        enjoyhint_instance.set(enjoyhint_script_steps);
+
+//run Enjoyhint script
+        enjoyhint_instance.run();
+
+    });
+
+</script>
+
+{% else %}
+{% if not user_empresa %}
+<script>
+     $(document).ready(function () {
+        console.log("***** Demo template loaded!");
+
+        $(".ratings-axis-input input").rating();
+
+
+        //initialize instance
+        var enjoyhint_instance = new EnjoyHint({});
+
+//simple config.
+//Only one step - highlighting(with description) "New" button
+//hide EnjoyHint after a click on the button.
+        var enjoyhint_script_steps = [
+            {
+                'click .user-helper-dropdown': 'Clique na seta para ver mais opções',
+                'shape': 'circle',
+                'radius': 20,
+                'showSkip' : false,
+            },
+            {
+                'click .botao_selecionar_empresa': 'Vá em "Minha Empresa"',
+                'showSkip' : false,
+            }
+        ];
+
+//set script config
+        enjoyhint_instance.set(enjoyhint_script_steps);
+
+//run Enjoyhint script
+        enjoyhint_instance.run();
+
+    });
+
+</script>
+{% endif %}
+{% endif %}
+
+{% endblock %}

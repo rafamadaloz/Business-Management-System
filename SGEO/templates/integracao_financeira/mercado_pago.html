@@ -1,0 +1,217 @@
+{%extends 'base/base.html'%}
+
+{%block title%}{%endblock%}
+{%block content%}
+<section class="content" id="eduzz">
+    <div class="container-fluid">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
+                <div class="card">
+
+                    <!--Header-->
+                    <div class="header">
+
+                        <h2>
+                            {{title_complete}}
+                        </h2>
+
+                        <a href="https://auth.mercadolivre.com.br/authorization?response_type=token&client_id=7445496401742511" class="btn-get-started btn-conectar">Conectar</a>
+
+
+                    </div>
+
+                    <div class="body">
+
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+                             style="padding-right: 0px; padding-left: 0px">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                <!-- START WIDGET SLIDER -->
+                                <div class="widget widget-default widget-carousel widget1">
+                                    <div>
+                                        <div class="widget-title">Valor de vendas</div>
+                                        <div class="widget-subtitle"></div>
+                                        <div class="widget-int">R$ 5.835,30</div>
+                                        <div class="widget-subtitle widget-buttons">35% de aumento com mês anterior
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END WIDGET SLIDER -->
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                <!-- START WIDGET MESSAGES -->
+                                <div class="widget widget-default widget-carousel widget2">
+                                    <div>
+                                        <div class="widget-title">Quantidade de vendas</div>
+                                        <div class="widget-subtitle"></div>
+                                        <div class="widget-int">86</div>
+                                        <div class="widget-subtitle widget-buttons">10% de aumento com mês anterior
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END WIDGET MESSAGES -->
+
+                            </div>
+
+                        </div>
+
+                       <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <div class="widget-graph widget--2x1">
+                                <div id="chartdiv-MP"></div>
+                            </div>
+                        </div>
+
+                        <div id="graficos" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding-left: 0px">
+                                <div class='widget-graph widget--3x1'>
+                                    <!--<header class='widget-header'>
+                                        <div class='widget-header-indicator'></div>
+                                    </header> -->
+                                    <div class='widget-content'>
+                                        <canvas id="line-chart-MP"></canvas>
+                                    </div>
+                                    <!--<footer class='widget-footer'>
+                                        <a class='fa fa-trash-o'></a>
+                                        <a class='fa fa-cog'></a>
+                                    </footer>-->
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding-right: 0px">
+                                <div class='widget-graph widget--3x1'>
+                                    <!--<header class='widget-header'>
+                                        <div class='widget-header-indicator'></div>
+                                    </header> -->
+                                    <div class='widget-content'>
+                                        <canvas id="line-chart-MP-quantidade"></canvas>
+                                    </div>
+                                    <!--<footer class='widget-footer'>
+                                        <a class='fa fa-trash-o'></a>
+                                        <a class='fa fa-cog'></a>
+                                    </footer>-->
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        {% include 'base/search.html' %}
+
+                        <div class="table-responsive">
+                            <table id="lista-database" class="table table-bordered table-striped lista-table">
+                                <thead>
+                                <tr>
+                                    <th>#ID</th>
+                                    <th>Descrição</th>
+                                    <th>Data do Pagamento</th>
+                                    <th>Grupo</th>
+                                    <th>Cliente</th>
+                                    <th>Valor Total</th>
+                                    <th>Remover</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for entrada in entradas %}
+                                {% if entrada.grupo_plano.id == 4 %}
+                                <tr class="clickable-row"
+                                    data-href="{% url 'financeiro:editarrecebimentoview' entrada.id %}">
+                                    <td>{{entrada.id}}</td>
+                                    <td>{{entrada.descricao}}</td>
+                                    <td>{{entrada.format_data_pagamento|default_if_none:""}}</td>
+                                    <td>{{entrada.grupo_plano.id}}</td>
+                                    <td>{{entrada.cliente|default_if_none:""}}</td>
+                                    <td>{{entrada.valor_total}}</td>
+                                    <td class="lista-remove">
+                                        <input type="checkbox" name="{{entrada.id}}"
+                                               id="remover-entrada-{{entrada.id}}"/>
+                                        <label class="remove-entry-label" for="remover-entrada-{{entrada.id}}"></label>
+                                    </td>
+                                </tr>
+                                {%endif%}
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="modal fade conectar_eduzz_modal">
+        <div class="modal-dialog modal-lg">
+            <form id="conexao_eduzz_form_modal" role="form" action="" method="post">
+                {% csrf_token %}
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">CONEXÃO COM EDUZZ</h4>
+                    </div>
+                    <div class="modal-body" >
+                        <div class="container-fluid">
+
+                            <div class="row">
+
+                                <div role="tabpanel" class="tab-pane active" id="tab_dados_oportunidade">
+
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <label {% for error in form.public_key.errors %}title="{{error}}"{% endfor %}>{{form.public_key.label}}</label>
+                                                {% if form.public_key.errors %}<label class="error"></label>{% endif %}
+                                                {{form.public_key}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <label {% for error in form.api_key.errors %}title="{{error}}"{% endfor %}>{{form.api_key.label}}</label>
+                                                {% if form.api_key.errors %}<label class="error"></label>{% endif %}
+                                                {{form.api_key}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- #SELECIONAR ARQUIVO XML -->
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn foot-btn" type="submit"><span>CONECTAR</span></button>
+                        </div>
+
+                    </div>
+            </form>
+        </div>
+    </div>
+    <!-- #-->
+</section>
+
+
+{%endblock%}
+
+{% block js %}
+
+<script type="text/javascript">
+    $.Admin.graficosMercadoPago.init();
+    $('body').on('click', '#conectar_eduzz', function(){
+        $('.conectar_eduzz_modal').modal('show');
+    });
+
+
+</script>
+
+{% endblock %}

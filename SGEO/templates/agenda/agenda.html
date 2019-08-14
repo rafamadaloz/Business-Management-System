@@ -1,0 +1,906 @@
+{%extends 'base/base.html'%}
+
+{%block title%}Agenda{%endblock%}
+{%block content%}
+
+<section class="content">
+    <div class="card fundo-preto">
+        <div class="borda-agenda">
+            <div id='calendar'></div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="cadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center">Cadastrar Evento</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal"  role="form" action="" method="post">
+			            {% csrf_token %}
+                        <!--<div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Cor</label>
+                            <div class="col-sm-10">
+                                <select name="color" class="form-control" id="color">
+                                    <option value="">Selecione</option>
+                                    <option style="color:#FFD700;" value="#FFD700">Amarelo</option>
+                                    <option style="color:#0071c5;" value="#0071c5">Azul Turquesa</option>
+                                    <option style="color:#FF4500;" value="#FF4500">Laranja</option>
+                                    <option style="color:#8B4513;" value="#8B4513">Marrom</option>
+                                    <option style="color:#1C1C1C;" value="#1C1C1C">Preto</option>
+                                    <option style="color:#436EEE;" value="#436EEE">Royal Blue</option>
+                                    <option style="color:#A020F0;" value="#A020F0">Roxo</option>
+                                    <option style="color:#40E0D0;" value="#40E0D0">Turquesa</option>
+                                    <option style="color:#228B22;" value="#228B22">Verde</option>
+                                    <option style="color:#8B0000;" value="#8B0000">Vermelho</option>
+                                </select>
+                            </div>
+                        </div>-->
+
+                            <div class="col-sm-12">
+                              <div class="form-group">
+                                <div class="form-line">
+                                  <label>{{form.cor.label}}</label>
+                                  {% if form.cor.errors %}<label class="error">{% for error in form.cor.errors %}{{error}}{% endfor %}</label>{% endif %}
+                                  {{form.cor}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <div class="form-group">
+                                <div class="form-line">
+                                  <label>{{form.event_name.label}}</label>
+                                  {% if form.event_name.errors %}<label class="error">{% for error in form.event_name.errors %}{{error}}{% endfor %}</label>{% endif %}
+                                  {{form.event_name}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <div class="form-line">
+                                  <label>{{form.start_date.label}}</label>
+                                  {% if form.start_date.errors %}<label class="error">{% for error in form.start_date.errors %}{{error}}{% endfor %}</label>{% endif %}
+                                  {{form.start_date}}
+                                </div>
+                              </div>
+                            </div>
+
+                             <div class="col-sm-6">
+                              <div class="form-group">
+                                <div class="form-line">
+                                  <label>{{form.end_date.label}}</label>
+                                  {% if form.end_date.errors %}<label class="error">{% for error in form.end_date.errors %}{{error}}{% endfor %}</label>{% endif %}
+                                  {{form.end_date}}
+                                </div>
+                              </div>
+                            </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12 text-center">
+                                 <button style="margin-top: 10px" class="btn btn-success foot-btn" type="submit"><i class="material-icons">&#xE148;</i><span> SALVAR</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{%endblock%}
+
+{% block js %}
+<script>
+     // Agenda
+
+$(document).ready(function () {
+
+    $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        navLinks: true, // can click day/week names to navigate views
+        editable: true,
+        eventLimit: true, // allow "more" link when too many events
+        selectable: true,
+        selectHelper: true,
+        select: function (start, end) {
+            $('#cadastrar #id_start_date').val(moment(start).format('DD/MM/YYYY HH:mm:ss'));
+            $('#cadastrar #id_end_date').val(moment(end).format('DD/MM/YYYY HH:mm:ss'));
+            $('#cadastrar').modal('show');
+        },
+        events: [
+            {
+                title: 'All Day Event',
+                start: '2018-03-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Reunião escritório Azzulai',
+                start: '2018-03-07',
+                color: '#77a4c4',
+            },
+            {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2018-03-09T16:00:00',
+                color: '#77a4c4',
+            },
+            {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2018-03-16T16:00:00',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Conference',
+                start: '2018-03-18',
+                end: '2018-03-20',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Meeting',
+                start: '2018-03-12T10:30:00',
+                end: '2018-03-12T12:30:00',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Lunch',
+                start: '2018-03-12T12:00:00',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Meeting',
+                start: '2018-03-12T14:30:00',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Happy Hour',
+                start: '2018-03-12T17:30:00',
+
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dinner',
+                start: '2018-03-12T20:00:00',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Birthday Party',
+                start: '2018-03-13T07:00:00',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Click for Google',
+                url: 'http://google.com/',
+                start: '2018-03-28',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Ano Novo',
+                start: '2019-01-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Carnaval',
+                start: '2019-03-05',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Sexta-Feira Santa',
+                start: '2019-04-19',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Páscoa',
+                start: '2019-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Tiradentes',
+                start: '2019-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dia do Trabalhador',
+                start: '2019-05-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Corpus Christi',
+                start: '2019-06-20',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Independência do Brasil',
+                start: '2019-09-07',
+                color: '#77a4c4',
+            }, {
+                title: 'Nossa Senhora Aparecida',
+                start: '2019-10-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Finados',
+                start: '2019-11-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Proclamação da República',
+                start: '2019-11-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Natal',
+                start: '2019-12-25',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Ano Novo',
+                start: '2020-01-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Carnaval',
+                start: '2020-02-25',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Sexta-Feira Santa',
+                start: '2020-04-10',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Páscoa',
+                start: '2020-04-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Tiradentes',
+                start: '2020-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dia do Trabalhador',
+                start: '2020-05-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Corpus Christi',
+                start: '2020-06-11',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Independência do Brasil',
+                start: '2020-09-07',
+                color: '#77a4c4',
+            }, {
+                title: 'Nossa Senhora Aparecida',
+                start: '2020-10-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Finados',
+                start: '2020-11-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Proclamação da República',
+                start: '2020-11-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Natal',
+                start: '2020-12-25',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Ano Novo',
+                start: '2021-01-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Carnaval',
+                start: '2021-02-16',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Sexta-Feira Santa',
+                start: '2021-04-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Páscoa',
+                start: '2021-04-04',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Tiradentes',
+                start: '2021-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dia do Trabalhador',
+                start: '2021-05-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Corpus Christi',
+                start: '2021-06-03',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Independência do Brasil',
+                start: '2021-09-07',
+                color: '#77a4c4',
+            }, {
+                title: 'Nossa Senhora Aparecida',
+                start: '2021-10-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Finados',
+                start: '2021-11-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Proclamação da República',
+                start: '2021-11-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Natal',
+                start: '2021-12-25',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Ano Novo',
+                start: '2022-01-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Carnaval',
+                start: '2022-03-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Sexta-Feira Santa',
+                start: '2022-04-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Páscoa',
+                start: '2022-04-17',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Tiradentes',
+                start: '2022-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dia do Trabalhador',
+                start: '2022-05-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Corpus Christi',
+                start: '2022-06-16',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Independência do Brasil',
+                start: '2022-09-07',
+                color: '#77a4c4',
+            }, {
+                title: 'Nossa Senhora Aparecida',
+                start: '2022-10-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Finados',
+                start: '2022-11-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Proclamação da República',
+                start: '2022-11-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Natal',
+                start: '2022-12-25',
+                color: '#77a4c4',
+            }, {
+                title: 'Ano Novo',
+                start: '2023-01-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Carnaval',
+                start: '2023-02-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Sexta-Feira Santa',
+                start: '2023-04-07',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Páscoa',
+                start: '2023-04-09',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Tiradentes',
+                start: '2023-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dia do Trabalhador',
+                start: '2023-05-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Corpus Christi',
+                start: '2023-06-08',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Independência do Brasil',
+                start: '2023-09-07',
+                color: '#77a4c4',
+            }, {
+                title: 'Nossa Senhora Aparecida',
+                start: '2023-10-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Finados',
+                start: '2023-11-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Proclamação da República',
+                start: '2023-11-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Natal',
+                start: '2023-12-25',
+                color: '#77a4c4',
+            }, {
+                title: 'Ano Novo',
+                start: '2024-01-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Carnaval',
+                start: '2024-02-13',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Sexta-Feira Santa',
+                start: '2024-03-29',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Páscoa',
+                start: '2024-03-31',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Tiradentes',
+                start: '2024-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dia do Trabalhador',
+                start: '2024-05-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Corpus Christi',
+                start: '2024-05-30',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Independência do Brasil',
+                start: '2024-09-07',
+                color: '#77a4c4',
+            }, {
+                title: 'Nossa Senhora Aparecida',
+                start: '2024-10-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Finados',
+                start: '2024-11-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Proclamação da República',
+                start: '2024-11-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Natal',
+                start: '2024-12-25',
+                color: '#77a4c4',
+            }, {
+                title: 'Ano Novo',
+                start: '2025-01-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Carnaval',
+                start: '2025-03-04',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Sexta-Feira Santa',
+                start: '2025-04-18',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Páscoa',
+                start: '2025-04-20',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Tiradentes',
+                start: '2025-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dia do Trabalhador',
+                start: '2025-05-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Corpus Christi',
+                start: '2025-06-19',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Independência do Brasil',
+                start: '2025-09-07',
+                color: '#77a4c4',
+            }, {
+                title: 'Nossa Senhora Aparecida',
+                start: '2025-10-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Finados',
+                start: '2025-11-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Proclamação da República',
+                start: '2025-11-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Natal',
+                start: '2025-12-25',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Ano Novo',
+                start: '2026-01-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Carnaval',
+                start: '2026-02-17',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Sexta-Feira Santa',
+                start: '2026-04-03',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Páscoa',
+                start: '2026-04-05',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Tiradentes',
+                start: '2026-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dia do Trabalhador',
+                start: '2026-05-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Corpus Christi',
+                start: '2026-06-04',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Independência do Brasil',
+                start: '2026-09-07',
+                color: '#77a4c4',
+            }, {
+                title: 'Nossa Senhora Aparecida',
+                start: '2026-10-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Finados',
+                start: '2026-11-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Proclamação da República',
+                start: '2026-11-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Natal',
+                start: '2026-12-25',
+                color: '#77a4c4',
+            }, {
+                title: 'Ano Novo',
+                start: '2027-01-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Carnaval',
+                start: '2027-02-09',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Sexta-Feira Santa',
+                start: '2027-03-26',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Páscoa',
+                start: '2027-03-28',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Tiradentes',
+                start: '2027-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dia do Trabalhador',
+                start: '2027-05-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Corpus Christi',
+                start: '2027-05-27',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Independência do Brasil',
+                start: '2027-09-07',
+                color: '#77a4c4',
+            }, {
+                title: 'Nossa Senhora Aparecida',
+                start: '2027-10-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Finados',
+                start: '2027-11-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Proclamação da República',
+                start: '2027-11-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Natal',
+                start: '2027-12-25',
+                color: '#77a4c4',
+            }, {
+                title: 'Ano Novo',
+                start: '2028-01-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Carnaval',
+                start: '2028-02-29',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Sexta-Feira Santa',
+                start: '2028-04-14',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Páscoa',
+                start: '2028-04-16',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Tiradentes',
+                start: '2028-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dia do Trabalhador',
+                start: '2028-05-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Corpus Christi',
+                start: '2028-06-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Independência do Brasil',
+                start: '2028-09-07',
+                color: '#77a4c4',
+            }, {
+                title: 'Nossa Senhora Aparecida',
+                start: '2028-10-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Finados',
+                start: '2028-11-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Proclamação da República',
+                start: '2028-11-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Natal',
+                start: '2028-12-25',
+                color: '#77a4c4',
+            }, {
+                title: 'Ano Novo',
+                start: '2029-01-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Carnaval',
+                start: '2029-02-13',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Sexta-Feira Santa',
+                start: '2029-03-30',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Páscoa',
+                start: '2029-04-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Tiradentes',
+                start: '2029-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dia do Trabalhador',
+                start: '2029-05-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Corpus Christi',
+                start: '2029-05-31',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Independência do Brasil',
+                start: '2029-09-07',
+                color: '#77a4c4',
+            }, {
+                title: 'Nossa Senhora Aparecida',
+                start: '2029-10-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Finados',
+                start: '2029-11-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Proclamação da República',
+                start: '2029-11-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Natal',
+                start: '2029-12-25',
+                color: '#77a4c4',
+            }, {
+                title: 'Ano Novo',
+                start: '2030-01-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Carnaval',
+                start: '2030-03-05',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Sexta-Feira Santa',
+                start: '2030-04-19',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Páscoa',
+                start: '2030-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Tiradentes',
+                start: '2030-04-21',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Dia do Trabalhador',
+                start: '2030-05-01',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Corpus Christi',
+                start: '2030-06-20',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Independência do Brasil',
+                start: '2030-09-07',
+                color: '#77a4c4',
+            }, {
+                title: 'Nossa Senhora Aparecida',
+                start: '2030-10-12',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Finados',
+                start: '2030-11-02',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Proclamação da República',
+                start: '2030-11-15',
+                color: '#77a4c4',
+            },
+            {
+                title: 'Natal',
+                start: '2030-12-25',
+                color: '#77a4c4',
+            },
+            {% for evento in eventos %}
+            {
+                title: '{{evento.event_name}}',
+                start: '{{evento.start_date|date:"Y-m-d"}}',
+                end: '{{evento.end_date|date:"Y-m-d"}}',
+                color: '{{evento.cor}}'
+            },
+            {% endfor %}
+
+
+        ]
+    });
+
+});
+
+// Fim agenda
+</script>
+
+
+{% endblock %}

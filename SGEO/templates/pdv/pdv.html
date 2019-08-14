@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+<!--    Verificação do Google -->
+    <meta name="google-site-verification" content="8vWp8ExlecU5NVbaz8GcoptvAv8hBuuK862fDKmWFwk" />
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'img/logogc_peq.png' %}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+          type="text/css">
+
+    <!-- Bootstrap Css -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Css -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/pdv.css' %}" rel="stylesheet">
+
+    <!-- Jquery 3.0.0 Js -->
+    <script src="{% static 'js/jquery/jquery-3.0.0.min.js' %}"></script>
+    <script src="{% static 'js/jQuery.weightMask.min.js' %}"></script>
+
+    <!-- jQuery !-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- jQuery UI !-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    {% block page_style %}
+		<link href="{% static 'autocomplete/easy-autocomplete.min.css' %}" rel="stylesheet" type="text/css">
+        <style>
+            th{background-color: rgb(233, 236, 239);}
+            .fa-trash-alt, .fa-trash{color: red;}
+        </style>
+    {% endblock page_style %}
+    {% block page_js %}
+            <script src="{% static 'autocomplete/jquery-1.11.2.min.js' %}"></script>
+            <script src="{% static 'autocomplete/jquery.easy-autocomplete.min.js' %}" type="text/javascript" ></script>
+    {% endblock page_js %}
+
+     <script src="{% static 'Form-Fields-Repeater/repeater.js' %}"></script>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li>
+                <a class="navbar-brand" href="#">
+                <img id="logo-navbar" src="{% static 'img/logogc4.png' %}" width="100px" alt="">
+                </a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-center">
+            <li><h3>Frente de Caixa</h3></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <p id="date"></p>
+                <div id="clock">
+                    <p class="unit" id="hours"></p>
+                    <p>:</p>
+                    <p class="unit" id="minutes"></p>
+                    <p>:</p>
+                    <p class="unit" id="seconds"></p>
+                    <p class="unit" id="ampm"></p>
+                </div>
+                <div class="btn-sair-pdv">
+                    <a href="{% url 'base:index' %}">Sair do PDV</a>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="conteudo-pdv">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="formulario">
+
+                <form id="add-to-cart-form"> {% csrf_token %}
+                     <div class="col-md-12">
+                        <label for="product-search">Código/Produto</label>
+                        <input onfocus="lastFocused=this;" type="text" id="product-search" name="firstname"
+                               placeholder="Procurar...">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="imagem-produto">
+                            <i class="material-icons">camera_alt</i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="quantidade">Quantidade</label>
+                        <input onfocus="lastFocused=this;" type="text" id="quantidade" name="quantidade">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="valor_unit">Valor Unitário R$</label>
+                        <input onfocus="lastFocused=this;" type="text" id="valor_unit" name="valor_unit">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="valor_total">Valor Total R$</label>
+                        <input type="text" id="valor_total" name="valor_total">
+                    </div>
+
+                    <input type="hidden" name="descricao" id="descricao">
+                    <input type="hidden" name="produto_id" id="produto_id">
+                    <input type="hidden" name="codigo" id="codigo">
+
+                    <div class="col-md-4 btn_adicionar">
+                        <input type="submit" value="Adicionar">
+                    </div>
+                </form>
+            </div>
+
+            <div id="wrap" class="col-md-6">
+                <ul id="numpad">
+                    <li class="shuffle">1</li>
+                    <li class="shuffle">2</li>
+                    <li class="shuffle">3</li>
+                    <li class="shuffle">4</li>
+                    <li class="shuffle">5</li>
+                    <li class="shuffle">6</li>
+                    <li class="shuffle">7</li>
+                    <li class="shuffle">8</li>
+                    <li class="shuffle">9</li>
+                    <li class="shuffle">.</li>
+                    <li class="shuffle">0</li>
+                    <li class="backspace"><i class="material-icons">backspace</i></li>
+                </ul>
+            </div>
+
+            <div class="botoes-pdv col-md-6">
+                <div class="col-md-12">
+                    <button class="btn-default btn-pagamento" data-toggle="modal" data-target="#modalPagamento">Pagamento</button>
+                </div>
+
+                <div class="col-md-12">
+                    <button onclick="window.location.href='{% url 'pdv:clear-cart' %}'"
+                            class="btn-default btn-limpar">Limpar</button>
+                </div>
+
+                <div class="col-md-12">
+                    <button class="btn-default btn-aguardar">Aguardar</button>
+                </div>
+
+                <div class="col-md-12">
+                    <button class="btn-default btn-ajuda">Ajuda</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-7">
+
+            <div class="info-usuario">
+               {% if user_empresa %}
+                    <h3>{{user_empresa}}</h3>
+                {% endif %}
+                <p>Operador: {{usuario}}</p>
+            </div>
+            <div class="tabela-produtos" id="cart-contents">
+                {% if cart_products|length > 0 %}
+                 <table class="table table-hover" id="cart-table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Qtde.</th>
+                        <th scope="col">Valor Unit.</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">Remover</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in cart_products %}
+                    <tr>
+                        <td scope="row">{{product.codigo}}</td>
+                        <td>{{product.descricao}}</td>
+                        <td>{{product.quantidade}}</td>
+                        <td>{{product.valor_unit}}</td>
+                        <td>{{product.valor_total}}</td>
+                        <td>
+                            <a href="{% url 'pdv:delete-from-cart' produto_id=product.produto_id %}"><i class="material-icons delete">delete</i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                    {% else %}
+                        <div class="" id="cart-alert">
+                            <h1>O carrinho está vazio</h1>
+                            <img id="img-shopping-cart" src="{% static 'img/shopping-cart.png' %}" width="200px" alt="">
+                        </div>
+                    {% endif %}
+                </table>
+            </div>
+            <div class="total" id="cart-total">
+                <span>Total: R$ 0,00</span>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="modalPagamento" tabindex="-1" role="dialog"
+         aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="informacoes-pagamento">
+
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">À receber</th>
+                                    <th scope="col">Troco</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="td-total"></td>
+                                    <td id="td-a-receber" class="td-a-receber"></td>
+                                    <td class="td-troco">0.00</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                    </div>
+
+                    <form id="form_forma_pagamento" name="form_forma_pagamento" class="repeater">
+                        <div class="row">
+                            <div data-repeater-list="category-group">
+                                <div data-repeater-item>
+                                    <div class="col-md-5">
+
+                                        <label for="formapagamento">Forma de pagamento</label>
+                                        <select id="formapagamento" required>
+                                            <option value="0">Dinheiro</option>
+                                            <option value="1">Cartão de crédito à vista</option>
+                                            <option value="1">Cartão de crédito à prazo</option>
+                                            <option value="2">Cartão de débito</option>
+                                            <option value="3">Outra</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <label for="valorrecebido">Valor Recebido R$</label>
+                                        <input type="text" id="valorrecebido" name="valorrecebido" class="valorrecebido" onkeyup="updatePagamento()">
+                                    </div>
+                                    <div class="col-md-2 btn-remover-pagamento">
+                                        <a data-repeater-delete onclick="updatePagamento()">
+                                            <i class="material-icons">delete</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <a data-repeater-create class="btn-incluir-forma-pag">Incluir outra <i
+                                        class="material-icons">add</i></a>
+                            </div>
+
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-default" data-dismiss="modal">Fechar</a>
+                    <a href="{% url 'pdv:checkout' %}" id="btn_enviar_form_modal" type="submit" class="btn btn-primary">Receber</a>
+                    <a id="btn_enviar_form_modal" type="submit" class="btn btn-primary">Receber e emitir NFC-e</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+</body>
+
+</html>
+
+{% block js %}
+
+<!-- Bootstrap Js -->
+
+<script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+
+<script>
+
+    $("#add-to-cart-form").submit(function () {
+
+       let formData = $("#add-to-cart-form").serialize();
+
+       $("#product-search").val('');
+
+       $.ajax({
+           url: "{% url 'pdv:add-to-cart' %}",
+           data: formData,
+           method: 'POST',
+           success: function(reply){
+
+               if(reply.error) {
+                   $('#cart-contents').html(reply.error);
+               }else {
+                   $('#cart-contents').html('');
+
+                   $('#cart-contents').append('<table class="table table-hover" id="cart-table"></table>');
+
+                   $('#cart-table').append('<thead>\n' +
+                       '                    <tr>\n' +
+                       '                        <th scope="col">Código</th>\n' +
+                       '                        <th scope="col">Descrição</th>\n' +
+                       '                        <th scope="col">Qtde.</th>\n' +
+                       '                        <th scope="col">Valor Unit.</th>\n' +
+                       '                        <th scope="col">Subtotal</th>\n' +
+                       '                        <th scope="col">Remover</th>\n' +
+                       '                    </tr>\n' +
+                       '                    </thead><tbody id="tbody-table"></tbody>');
+
+                   let cart_total = 0.00;
+
+                   reply.forEach(function (item) {
+
+                       cart_total = cart_total + parseFloat(item.valor_total);
+                       valor_unit = parseFloat(item.valor_unit).toFixed(2);
+                       valor_total = parseFloat(item.valor_total).toFixed(2);
+
+
+                       $('#tbody-table').append("<tr id='" + item.produto_id + "'></tr>");
+
+                       $("tr#" + item.produto_id).append(' <td>'+item.codigo+'</td>\n' +
+                           '                        <td>'+item.descricao+'</td>\n' +
+                           '                        <td>'+item.quantidade+'</td>\n' +
+                           '                        <td>'+valor_unit+'</td>\n' +
+                           '                        <td>'+valor_total+'</td>\n' +
+                           '                        <td>\n' +
+                           '                            <a href="/pdv/delete-from-cart/'+item.produto_id+'"><i class="material-icons delete">delete</i></a>\n' +
+                           '                        </td>');
+
+                       $('#cart-total').html("<span>Total: R$ " + cart_total.toFixed(2) + "</span>");
+                       $('.td-total').html(cart_total.toFixed(2));
+                       $('.td-a-receber').html(cart_total.toFixed(2));
+                       $('#tbody-table').animate({scrollTop:$(document).height()}, 1);
+                   });
+               }
+           }
+       });
+
+       return false;
+    });
+
+    let options = {
+
+        url: "{% url 'pdv:search-products' %}?product=" + $("#product-search").val(),
+
+        getValue: function(element){
+                 return element.descricao+" | "+element.codigo+" | "+element.codigo_barras;
+              },
+
+        list: {
+            match: {
+                enabled: true,
+            },
+            onChooseEvent: function() {
+                $("#quantidade").val(1);
+
+                var valor_unit = $("#product-search").getSelectedItemData().valor_unit;
+                valor_unit = parseFloat(valor_unit).toFixed(2);
+                var descricao = $("#product-search").getSelectedItemData().descricao;
+                var produto_id = $("#product-search").getSelectedItemData().produto_id;
+                var codigo = $("#product-search").getSelectedItemData().codigo;
+
+
+                $("#valor_unit").val(valor_unit);
+                $("#valor_total").val(valor_unit);
+                $("#codigo").val(codigo);
+                $("#descricao").attr("value", descricao);
+                $("#produto_id").attr("value", produto_id);
+                $("#valor_total").attr("value", valor_unit);
+
+                $("#product-search").focus();
+            },
+        },
+    };
+
+
+    $("#product-search").easyAutocomplete(options);
+
+    $(function () {
+       $("#repeater").createRepeater()
+    });
+
+    var $dOut = $('#date'),
+        $hOut = $('#hours'),
+        $mOut = $('#minutes'),
+        $sOut = $('#seconds'),
+        $ampmOut = $('#ampm');
+    var months = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+
+    var days = [
+        'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'
+    ];
+
+    function update() {
+        var date = new Date();
+
+        var hours = date.getHours() < 10
+            ? '0' + date.getHours()
+            : date.getHours();
+
+        var minutes = date.getMinutes() < 10
+            ? '0' + date.getMinutes()
+            : date.getMinutes();
+
+        var seconds = date.getSeconds() < 10
+            ? '0' + date.getSeconds()
+            : date.getSeconds();
+
+        var dayOfWeek = days[date.getDay()];
+        var month = months[date.getMonth()];
+        var day = date.getDate();
+        var year = date.getFullYear();
+
+        var dateString = dayOfWeek + ', ' + day + ' de ' + month + ' de ' + year;
+
+        $dOut.text(dateString);
+        $hOut.text(hours);
+        $mOut.text(minutes);
+        $sOut.text(seconds);
+    }
+
+    update();
+    window.setInterval(update, 1000);
+
+    $("#quantidade").val(1);
+    $("#valor_unit").val(0.00);
+    $("#valor_total").val(0.00);
+
+    var lastFocused = null;
+
+    $("#product-search").focus();
+
+    $('.shuffle').click(function () {
+        $(lastFocused).val($(lastFocused).val() + $(this).text());
+        $(lastFocused).focus();
+    });
+
+    $('.backspace').click(function () {
+        $(lastFocused).val(
+            function (index, value) {
+                return value.substr(0, value.length - 1);
+            });
+        $(lastFocused).focus();
+    });
+
+    $('#quantidade').on('input', function () {
+        $('#valor_total').val(($(this).val() * $('#valor_unit').val()).toFixed(2));
+    });
+
+    $('#valor_unit').on('input', function () {
+        $('#valor_total').val(($(this).val() * $('#quantidade').val()).toFixed(2));
+    });
+
+
+    function updatePagamento() {
+        var qtd = $('input[name*="category-group').length;
+        var valor_recebido = 0.00;
+
+        var valor_recebido_str = '';
+
+        for (i = 0; i < qtd; i++) {
+            valor_recebido_str = $('input[name="category-group['+i+'][valorrecebido]"').val();
+            if (valor_recebido_str != '') {
+                valor_recebido += parseFloat(valor_recebido_str);
+            }
+        }
+
+        var totalVenda = $('.td-total').html();
+
+        if (totalVenda != '') {
+            totalVenda = parseFloat(totalVenda);
+        }
+
+        var valorAReceber = (totalVenda - valor_recebido).toFixed(2);
+
+        if (valorAReceber < 0) {
+            valorAReceber = (valorAReceber * (-1)).toFixed(2);
+            $('.td-troco').html(valorAReceber);
+            $('.td-a-receber').html(0.00.toFixed(2));
+        } else {
+            $('.td-a-receber').html(valorAReceber);
+            $('.td-troco').html(0.00.toFixed(2));
+        }
+
+    }
+
+</script>
+
+{% if cart_products|length > 0 %}
+
+    <script>
+        var totalVendas = 0.00;
+        var totalProduto = 0.00;
+    </script>
+
+    {% for product in cart_products %}
+        <script>
+           totalProduto = parseFloat('{{product.valor_total}}');
+           totalVendas += totalProduto;
+        </script>
+    {% endfor %}
+
+    <script>
+        $('.td-total').html(totalVendas.toFixed(2));
+        $('.td-a-receber').html(totalVendas.toFixed(2));
+        $('#cart-total').html("<span>Total: R$ " + totalVendas.toFixed(2) + "</span>");
+    </script>
+
+{% endif %}
+
+{% endblock %}

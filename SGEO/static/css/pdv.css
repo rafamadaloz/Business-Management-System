@@ -1,0 +1,304 @@
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+.navbar .navbar-center {
+    font-family: "Montserrat", sans-serif;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav.navbar-center {
+        position: absolute;
+        left: 50%;
+        transform: translatex(-50%);
+    }
+}
+
+.delete {
+    color: red;
+}
+
+.edit {
+    color: blue;
+}
+
+.navbar-default {
+    background: black;
+    color: white;
+}
+
+.imagem-produto {
+    height: 165px;
+    background: white;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.imagem-produto i {
+    margin-top: 30px;
+    font-size: 100px;
+    color: rgba(0, 0, 0, 0.19);
+
+}
+
+.navbar-default a {
+    color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+    font-size: 18px;
+}
+
+#clock{
+  display: flex;
+  position: absolute;
+}
+
+#date {
+     margin: 10px 35px 0px 0;
+}
+
+#clock p {
+    margin: 0 2px 0px 0;
+    font-size: 18px;
+}
+
+.btn-sair-pdv {
+    font-size: 12px;
+    float: right;
+    margin-right: 30px;
+    margin-top: 5px;
+}
+
+.conteudo-pdv {
+    margin: 90px 10px 10px 10px;
+}
+
+.btn_adicionar {
+    margin-top: 25px;
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #5558d4;
+  color: white;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #4a4db9;
+}
+
+.tabela-produtos {
+    background: white;
+    height: 60vh;
+}
+
+.tabela-produtos tbody {
+    display:block;
+    max-height:53vh;
+    overflow-y:scroll;
+}
+.tabela-produtos thead,
+.tabela-produtos tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+.tabela-produtos thead {
+    width:100%;
+}
+.tabela-produtos table {
+    width:100%;
+}
+.total {
+    padding: 10px;
+    color: white;
+    background: black;
+    font-size: 22px;
+    text-align: center;
+}
+
+.info-usuario {
+    padding: 1px;
+    color: white;
+    background: black;
+    font-size: 20px;
+    text-align: center;
+}
+
+.info-usuario h3 {
+    font-size: 20px;
+}
+
+.info-usuario p {
+    font-size: 14px;
+}
+
+.botoes-pdv button {
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+    width: 100%;
+    color: white;
+}
+
+.btn-incluir-forma-pag,
+.btn-incluir-forma-pag:hover {
+    padding: 10px;
+    background: blue;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-incluir-forma-pag i {
+    transform: translateY(5px);
+}
+
+.botoes-pdv button:hover {
+    color: white;
+}
+
+.botoes-pdv {
+    margin-top: 25px;
+    color: white;
+}
+
+.btn-pagamento,
+.btn-pagamento:focus {
+    background: #4CAF50;
+}
+
+.btn-pagamento:hover{
+    background: #449a48;
+}
+
+.btn-limpar,
+.btn-limpar:focus {
+    background: #ffac0a;
+}
+
+.btn-limpar:hover {
+    background: #e4960a;
+}
+
+.btn-aguardar,
+.btn-aguardar:focus {
+    background: #6568ff;
+}
+
+.btn-aguardar:hover {
+    background: #5558d4;
+}
+
+.btn-ajuda,
+.btn-ajuda:focus,
+.btn-ajuda:hover {
+    background: black;
+}
+
+.btn-remover-pagamento {
+    margin-top: 40px;
+}
+
+.btn-remover-pagamento a {
+    color: red;
+    cursor: pointer;
+}
+
+#wrap {
+  width: 220px;
+  font-size: 12px;
+    padding-top: 30px;
+}
+
+#display {
+  top: -10px;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #5558d4;
+}
+
+#display li {
+  display: inline-block;
+  font-family: monospace;
+  font-size: 200%;
+  padding: 5px 12px;
+  background: #FDD147;
+  color: black;
+  margin-right: 1px;
+}
+
+#numpad li {
+  font-family: monospace;
+  font-size: 200%;
+  border-radius: 51%;
+  float: left;
+  padding: 8px 16px;
+  background: #5558d4;
+  color: white;
+  margin: 5px;
+  cursor: pointer;
+  -webkit-transition: box-shadow 0.3s ease-in-out;
+  -moz-transition: box-shadow 0.3s ease-in-out;
+  -o-transition: box-shadow 0.3s ease-in-out;
+  -ms-transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.backspace i {
+    font-size: 15px;
+}
+
+.pressed {
+  box-shadow: inset 2px 2px 12px 5px rgba(0,0,0,0.5);
+}
+
+.clear {
+  clear: both;
+}
+
+.formulario {
+    height: 100%;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.remove-btn {
+    margin-top: 20px!important;
+}
+
+#cart-alert {
+    text-align: center;
+    opacity: 0.5;
+}
+
+#cart-alert h1 {
+    margin: 0;
+    padding: 60px 10px 10px 10px;
+}
+
+
+
+

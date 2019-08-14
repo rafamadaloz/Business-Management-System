@@ -1,0 +1,47 @@
+{%extends 'base/base.html'%}
+
+{%block title%}Adicionar Configuração de Boletos{%endblock%}
+{%block content%}
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="title-header">
+      <h2>CONFIGURAÇÃO DE BOLETOS</h2>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="row">
+        <div class="card">
+
+          <!--Header-->
+          <div class="header">
+
+            <div><small>Campos marcados com <strong style="color:red;">*</strong> são obrigatórios.</small></div>
+
+          </div>
+          <!--# Header-->
+
+          <form role="form" action="" method="post">
+            {% csrf_token %}
+
+            {% include 'boletos/configuracao/configuracao_form.html' %}
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+{%endblock%}
+
+{% block js %}
+
+  {% include 'base/load_jqueryui.html' %}
+
+  {% include 'base/tooltip_js.html' %}
+
+{% endblock %}

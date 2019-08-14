@@ -1,0 +1,110 @@
+{%extends 'base/base.html'%}
+
+{%block title%}Navegação{%endblock%}
+{%block content%}
+
+{% load staticfiles %}
+
+<section class="content">
+
+    <div class="opcoes-navegacao">
+
+        <div class="form-line col-md-3">
+
+            <select id="select-categoria-navegacao" class="form-control">
+                <option value="0" selected>Mostrar todos</option>
+                <option value="1">Consumidor tinal</option>
+                <option value="2">Garantia</option>
+                <option value="3">Remessa</option>
+                <option value="4">Venda externa</option>
+                <option value="5">Venda loja</option>
+                <option value="6">Venda de materiais e serviços</option>
+                <option value="7">Venda site</option>
+            </select>
+        </div>
+
+        <div class="header-btn col-md-3">
+            <a id="nova_oportunidade" class="btn btn-success"><i
+                    class="material-icons">&#xE148;</i><span> NOVA OPORTUNIDADE</span></a>
+
+            <form id="addoportunidade_form" role="form" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+                {% include 'crm2/navegacao/modal-add-oportunidade.html' %}
+
+            </form>
+
+
+        </div>
+
+    </div>
+    <div class="colunas-status">
+
+        {% for status in status_vendas %}
+
+        <div class="coluna1">
+            <div class="titulo">
+                <h4>{{status.status_venda}}</h4>
+            </div>
+
+            <div id="coluna-{{status.id}}" style="height: 100vh; width: 100%">
+
+                {% for oportunidade in oportunidades %}
+                {% if oportunidade.status_venda.id == status.id %}
+                <div class="oportunidade1" >
+                    <a class="material-icons popup" href="{% url 'crm2:editaroportunidadepopupview' oportunidade.id %}">
+                        edit
+                    </a>
+
+                    <p>ID: {{oportunidade.id}} - R$ {{oportunidade.valor}}</p>
+                    <p>{{oportunidade.cliente}}</p>
+                    {% for etiqueta in oportunidade.etiquetas.all %}
+                    <div class="etiqueta" title="{{etiqueta.descricao}}" style="background-color: {{etiqueta.cor}}"></div>
+                    {% endfor %}
+
+
+
+                </div>
+                {% endif %}
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+</section>
+
+{%endblock%}
+
+{% block js %}
+{% include 'base/load_jqueryui.html' %}
+
+{% include 'base/tooltip_js.html' %}
+
+<script type="text/javascript">
+    $('body').on('click', '#nova_oportunidade', function(){
+        $('.nova_oportunidade_modal').modal('show');
+    });
+
+    var colunas = [];
+
+    {% for status in status_vendas %}
+
+    colunas.push(document.getElementById("coluna-{{status.id}}"));
+
+    {% endfor %}
+
+    dragula(colunas, {
+        revertOnSpill: true
+    });
+
+</script>
+
+{% endblock %}
+
